@@ -1,0 +1,14 @@
+namespace Spdx;
+
+public sealed partial class SpdxLicense
+{
+    internal static IReadOnlyList<SpdxLicense> GenerateLicenseList()
+    {
+        return new List<SpdxLicense>
+        {
+            {{~ for license in licenses ~}}
+            new SpdxLicense("{{ license.id }}", "{{ license.name | string.escape }}", "{{ license.reference }}", "{{ license.url }}",{{ license.osi_approved }}, {{ license.is_fsf_libre }}, {{ license.is_deprecated }}),
+            {{~ end ~}}
+        };
+    }
+}
