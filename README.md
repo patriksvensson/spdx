@@ -1,4 +1,6 @@
-# Spdx
+# `Spdx`
+
+_[![Spdx NuGet Version](https://img.shields.io/nuget/v/spdx.svg?style=flat&label=NuGet%3A%20Spdx)](https://www.nuget.org/packages/spdx)_
 
 A library that makes it easy to retrieve information about SPDX licenses.
 
