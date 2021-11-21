@@ -1,5 +1,3 @@
-using Shouldly;
-
 namespace Spdx.Tests;
 
 public sealed class SpdxLicenseTests
@@ -8,7 +6,7 @@ public sealed class SpdxLicenseTests
     public void Should_Get_All_Licenses()
     {
         // Given, When
-        var licenses = SpdxLicense.GetAll().ToArray();
+        var licenses = SpdxLicense.All.ToArray();
 
         // Then
         licenses.Length.ShouldBe(479);
@@ -18,7 +16,7 @@ public sealed class SpdxLicenseTests
     public void Should_Populate_MIT_License_With_Expected_Data()
     {
         // Given, When
-        var license = SpdxLicense.GetById("MIT");
+        var license = SpdxLicense.Lookup["MIT"];
 
         // Then
         license.ShouldNotBeNull();

@@ -5,15 +5,13 @@ using Spectre.Console;
 
 namespace Example
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            var licenses = SpdxLicense.GetAll();
-
-            var osiApproved = licenses.Where(x => x.IsOsiApproved);
-            var fsfLibre = licenses.Where(x => x.IsFsfLibre);
-            var deprecated = licenses.Where(x => x.IsDeprecated);
+            var osiApproved = SpdxLicense.All.Where(x => x.IsOsiApproved);
+            var fsfLibre = SpdxLicense.All.Where(x => x.IsFsfLibre);
+            var deprecated = SpdxLicense.All.Where(x => x.IsDeprecated);
 
             AnsiConsole.WriteLine();
             AnsiConsole.Write(new Table()
@@ -21,13 +19,13 @@ namespace Example
                 .NoBorder()
                 .AddColumn(new TableColumn("Key").RightAligned())
                 .AddColumn("Value")
-                .AddRow("[yellow]Number of licenses:[/]", licenses.Count.ToString())
+                .AddRow("[yellow]Number of licenses:[/]", SpdxLicense.All.Count.ToString())
                 .AddRow("[yellow]OSI approved:[/]", osiApproved.Count().ToString())
                 .AddRow("[yellow]FSF Libre:[/]", fsfLibre.Count().ToString())
                 .AddRow("[yellow]Deprecated:[/]", deprecated.Count().ToString()));
 
             // Get a random license
-            var license = licenses[Random.Shared.Next(licenses.Count - 1)];
+            var license = SpdxLicense.All[Random.Shared.Next(SpdxLicense.All.Count)];
 
             AnsiConsole.WriteLine();
             AnsiConsole.Write(new Table()

@@ -5,9 +5,6 @@ namespace Spdx;
 /// </summary>
 public sealed partial class SpdxLicense
 {
-    private static readonly IReadOnlyList<SpdxLicense> _licenses;
-    private static readonly Dictionary<string, SpdxLicense> _lookup;
-
     /// <summary>
     /// Gets the SPDX license ID.
     /// </summary>
@@ -43,14 +40,20 @@ public sealed partial class SpdxLicense
     /// </summary>
     public bool IsDeprecated { get; }
 
+    /// <summary>
+    /// Gets all SPDX licenses.
+    /// </summary>
+    public static IReadOnlyList<SpdxLicense> All { get; }
+
+    /// <summary>
+    /// Gets a dictionary that can be used for lookup of licenses.
+    /// </summary>
+    public static IReadOnlyDictionary<string, SpdxLicense> Lookup { get; }
+
     static SpdxLicense()
     {
-        _licenses = GenerateLicenseList();
-        _lookup = new Dictionary<string, SpdxLicense>(StringComparer.OrdinalIgnoreCase);
-        foreach (var license in _licenses)
-        {
-            _lookup.Add(license.Id, license);
-        }
+        All = GenerateLicenseList();
+        Lookup = All.ToDictionary(x => x.Id, x => x, StringComparer.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -72,34 +75,5 @@ public sealed partial class SpdxLicense
         IsFsfLibre = isFsfLibre;
         IsOsiApproved = isOsiApproved;
         IsDeprecated = deprecated;
-    }
-
-    /// <summary>
-    /// Gets the number of SPDX licenses.
-    /// </summary>
-    /// <returns>The number of SPDX licenses.</returns>
-    public static int GetCount()
-    {
-        return _licenses.Count;
-    }
-
-    /// <summary>
-    /// Gets all SPDX licenses.
-    /// </summary>
-    /// <returns>An enumerable of SPDX licenses.</returns>
-    public static IReadOnlyList<SpdxLicense> GetAll()
-    {
-        return _licenses;
-    }
-
-    /// <summary>
-    /// Gets a SPDX license by its SPDX license ID.
-    /// </summary>
-    /// <param name="id">The SPDX license ID.</param>
-    /// <returns>The SPDX license, or <c>null</c> if not found.</returns>
-    public static SpdxLicense? GetById(string id)
-    {
-        _lookup.TryGetValue(id, out var license);
-        return license;
     }
 }

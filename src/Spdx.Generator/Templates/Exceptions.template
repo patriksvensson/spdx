@@ -1,0 +1,14 @@
+namespace Spdx;
+
+public sealed partial class SpdxLicenseException
+{
+    internal static IReadOnlyList<SpdxLicenseException> GenerateExceptionList()
+    {
+        return new List<SpdxLicenseException>
+        {
+            {{~ for exception in exceptions ~}}
+            new SpdxLicenseException("{{ exception.id }}", "{{ exception.name | string.escape }}", "{{ exception.reference }}", "{{ exception.url }}", {{ exception.is_deprecated }}),
+            {{~ end ~}}
+        };
+    }
+}

@@ -11,16 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "..\examples\Exam
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{FE3DAEB7-4C57-48B8-ADFB-74D429CD05DE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9C3DA7B2-0055-453E-BFF7-F4D24B438433}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spdx.Generator", "Spdx.Generator\Spdx.Generator.csproj", "{6481A300-2C7E-4079-AA80-221912C74DF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meta", "Meta", "{EDCE8EAB-7EFA-42D9-BC17-F94F19904B96}"
 	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 		stylecop.json = stylecop.json
