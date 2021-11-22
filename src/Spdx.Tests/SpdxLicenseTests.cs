@@ -16,14 +16,12 @@ public sealed class SpdxLicenseTests
     public void Should_Populate_MIT_License_With_Expected_Data()
     {
         // Given, When
-        var license = SpdxLicense.Lookup["MIT"];
+        var license = SpdxLicense.GetById("MIT");
 
         // Then
         license.ShouldNotBeNull();
         license.Id.ShouldBe("MIT");
         license.Name.ShouldBe("MIT License");
-        license.Url.ShouldBe("https://spdx.org/licenses/MIT.html");
-        license.JsonUrl.ShouldBe("https://spdx.org/licenses/MIT.json");
         license.IsOsiApproved.ShouldBeTrue();
         license.IsFsfLibre.ShouldBeTrue();
         license.IsDeprecated.ShouldBeFalse();

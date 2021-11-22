@@ -20,6 +20,7 @@ namespace Example
                 .AddColumn(new TableColumn("Key").RightAligned())
                 .AddColumn("Value")
                 .AddRow("[yellow]Number of licenses:[/]", SpdxLicense.All.Count.ToString())
+                .AddRow("[yellow]Exceptions:[/]", SpdxLicense.Exceptions.All.Count.ToString())
                 .AddRow("[yellow]OSI approved:[/]", osiApproved.Count().ToString())
                 .AddRow("[yellow]FSF Libre:[/]", fsfLibre.Count().ToString())
                 .AddRow("[yellow]Deprecated:[/]", deprecated.Count().ToString()));
@@ -34,8 +35,6 @@ namespace Example
                 .AddColumns("Key", "Value")
                 .AddRow("[yellow]ID[/]", license.Id)
                 .AddRow("[yellow]Name[/]", license.Name)
-                .AddRow("[yellow]URL[/]", license.Url)
-                .AddRow("[yellow]JSON URL[/]", license.JsonUrl)
                 .AddRow("[yellow]OSI approved[/]", license.IsOsiApproved ? "Yes" : "No")
                 .AddRow("[yellow]FSF Libre[/]", license.IsFsfLibre ? "Yes" : "No")
                 .AddRow("[yellow]Deprecated[/]", license.IsDeprecated ? "Yes" : "No"));

@@ -172,12 +172,12 @@ internal sealed class Lexer
             }
             else
             {
-                if (SpdxLicense.Lookup.ContainsKey(text))
+                if (SpdxLicense.Exists(text))
                 {
                     token = new Token(TokenType.LicenseId, text);
                     return true;
                 }
-                else if (SpdxLicenseException.Lookup.ContainsKey(text))
+                else if (SpdxLicense.Exceptions.Exists(text))
                 {
                     token = new Token(TokenType.Exception, text);
                     return true;

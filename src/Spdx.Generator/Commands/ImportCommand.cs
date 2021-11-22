@@ -59,7 +59,7 @@ public sealed class ImportCommand : AsyncCommand<ImportCommand.Settings>
         if (!string.IsNullOrWhiteSpace(settings.Output))
         {
             var output = new DirectoryPath(settings.Output);
-            File.WriteAllText(output.CombineWithFilePath("SpdxLicenseException.Generated.cs").FullPath, result);
+            File.WriteAllText(output.CombineWithFilePath("SpdxLicense.Exceptions.Generated.cs").FullPath, result);
         }
     }
 }
