@@ -45,7 +45,7 @@ internal static class Parser
         while (lexer.Current?.Type == TokenType.Or)
         {
             lexer.MoveNext();
-            expression = new SpdxAndExpression(expression, ParseOr(lexer));
+            expression = new SpdxOrExpression(expression, ParseOr(lexer));
         }
 
         return expression;

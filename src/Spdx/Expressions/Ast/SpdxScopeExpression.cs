@@ -19,7 +19,8 @@ public sealed class SpdxScopeExpression : SpdxExpression
         Expression = expression ?? throw new ArgumentNullException(nameof(expression));
     }
 
-    internal override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
+    /// <inheritdoc/>
+    public override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
     {
         return visitor.VisitScope(context, this);
     }

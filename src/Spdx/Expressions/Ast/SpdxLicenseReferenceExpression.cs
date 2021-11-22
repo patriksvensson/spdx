@@ -32,7 +32,8 @@ public sealed class SpdxLicenseReferenceExpression : SpdxExpression
         }
     }
 
-    internal override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
+    /// <inheritdoc/>
+    public override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
     {
         return visitor.VisitReference(context, this);
     }

@@ -11,7 +11,7 @@ public abstract class SpdxExpressionVisitor<TContext> : ISpdxExpressionVisitor<T
     /// </summary>
     /// <param name="context">The context.</param>
     /// <param name="expression">The expression node.</param>
-    protected void Visit(TContext context, SpdxExpression expression)
+    public void Visit(TContext context, SpdxExpression expression)
     {
         if (expression is null)
         {

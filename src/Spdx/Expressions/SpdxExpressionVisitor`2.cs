@@ -13,7 +13,7 @@ public abstract class SpdxExpressionVisitor<TContext, TResult> : ISpdxExpression
     /// <param name="context">The context.</param>
     /// <param name="expression">The expression node.</param>
     /// <returns>The result from the invocation.</returns>
-    protected TResult Visit(TContext context, SpdxExpression expression)
+    public TResult Visit(TContext context, SpdxExpression expression)
     {
         if (expression is null)
         {

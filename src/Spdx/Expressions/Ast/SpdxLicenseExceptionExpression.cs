@@ -19,7 +19,8 @@ public sealed class SpdxLicenseExceptionExpression : SpdxExpression
         Id = id ?? throw new ArgumentNullException(nameof(id));
     }
 
-    internal override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
+    /// <inheritdoc/>
+    public override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
     {
         return visitor.VisitException(context, this);
     }

@@ -26,7 +26,8 @@ public sealed class SpdxWithExpression : SpdxExpression
         Exception = exception ?? throw new ArgumentNullException(nameof(exception));
     }
 
-    internal override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
+    /// <inheritdoc/>
+    public override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
     {
         return visitor.VisitWith(context, this);
     }

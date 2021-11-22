@@ -17,5 +17,13 @@ public abstract class SpdxExpression
         return Parser.Parse(lexer);
     }
 
-    internal abstract TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor);
+    /// <summary>
+    /// Accepts a node using the specified context and <see cref="ISpdxExpressionVisitor{TContext, TResult}"/>.
+    /// </summary>
+    /// <typeparam name="TContext">The context type.</typeparam>
+    /// <typeparam name="TResult">The result type.</typeparam>
+    /// <param name="context">The context.</param>
+    /// <param name="visitor">The visitor.</param>
+    /// <returns>The result of the invocation.</returns>
+    public abstract TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor);
 }

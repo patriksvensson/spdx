@@ -26,7 +26,8 @@ public sealed class SpdxLicenseExpression : SpdxExpression
         OrLater = orLater;
     }
 
-    internal override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
+    /// <inheritdoc/>
+    public override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
     {
         return visitor.VisitLicense(context, this);
     }

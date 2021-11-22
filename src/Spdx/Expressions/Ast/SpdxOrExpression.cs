@@ -26,7 +26,8 @@ public sealed class SpdxOrExpression : SpdxExpression
         Right = right ?? throw new ArgumentNullException(nameof(right));
     }
 
-    internal override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
+    /// <inheritdoc/>
+    public override TResult Accept<TContext, TResult>(TContext context, ISpdxExpressionVisitor<TContext, TResult> visitor)
     {
         return visitor.VisitOr(context, this);
     }

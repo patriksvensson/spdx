@@ -5,8 +5,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ExampleTitle>Demo</ExampleTitle>
-    <ExampleDescription>A simple demo of Spdx.</ExampleDescription>
+    <Nullable>enable</Nullable>
+    <ExampleTitle>Expressions</ExampleTitle>
+    <ExampleDescription>Demonstrates how to work with SPDX expressions.</ExampleDescription>
   </PropertyGroup>
 
   <ItemGroup>
