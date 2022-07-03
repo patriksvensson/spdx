@@ -1,5 +1,5 @@
+using Spdx;
 using Spdx.Expressions;
-using Spdx.Expressions.Ast;
 
 namespace Expressions
 {

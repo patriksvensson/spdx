@@ -1,4 +1,4 @@
-namespace Spdx.Expressions.Parsing;
+namespace Spdx.Expressions;
 
 internal enum TokenType
 {

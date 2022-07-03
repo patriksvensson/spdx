@@ -1,17 +1,19 @@
-namespace Spdx.Expressions.Parsing;
+namespace Spdx.Expressions;
 
 internal sealed class Lexer
 {
     private readonly TextBuffer _buffer;
     private readonly Queue<Token> _queue;
+    private readonly SpdxParseOptions _options;
 
     public Token? Current { get; private set; }
     public Token? Previous { get; private set; }
 
-    public Lexer(string expression)
+    public Lexer(string expression, SpdxParseOptions options)
     {
         _buffer = new TextBuffer(expression);
         _queue = new Queue<Token>();
+        _options = options;
     }
 
     public void MoveNext()
@@ -65,7 +67,7 @@ internal sealed class Lexer
         var temp = Current;
         if (temp == null)
         {
-            throw new InvalidOperationException("Cannot consume null token");
+            throw new SpdxParseException("Could not parse expression (tried consuming null token)");
         }
 
         Expect(type);
@@ -86,7 +88,7 @@ internal sealed class Lexer
         var temp = Current;
         if (temp == null)
         {
-            throw new InvalidOperationException("Cannot consume null token");
+            throw new SpdxParseException("Could not parse expression (tried consuming null token)");
         }
 
         foreach (var type in types)
@@ -99,7 +101,7 @@ internal sealed class Lexer
         }
 
         var text = string.Join(", ", types.Select(t => t.ToString()));
-        throw new InvalidOperationException($"Expected token to be one of the following: {text} but got {Current?.Type}");
+        throw new SpdxParseException($"Expected token to be one of the following: {text} but got '{Current?.Type}ä");
     }
 
     public bool Read([NotNullWhen(true)] out Token? token)
@@ -193,6 +195,23 @@ internal sealed class Lexer
                             token = new Token(TokenType.LicenseRef, licenseRef);
                             return true;
                         }
+
+                        if (Previous != null && Previous.Type == TokenType.With)
+                        {
+                            if (_options.HasFlag(SpdxParseOptions.AllowUnknownExceptions))
+                            {
+                                token = new Token(TokenType.Exception, text);
+                                return true;
+                            }
+
+                            throw new SpdxParseException($"Invalid SPDX license exception '{text}'");
+                        }
+
+                        if (_options.HasFlag(SpdxParseOptions.AllowUnknownLicenses))
+                        {
+                            token = new Token(TokenType.LicenseId, text);
+                            return true;
+                        }
                     }
                     else if (parts.Length == 2)
                     {
@@ -208,12 +227,12 @@ internal sealed class Lexer
                         }
                     }
 
-                    throw new InvalidOperationException($"Invalid license '{text}'");
+                    throw new SpdxParseException($"Invalid SPDX license '{text}'");
                 }
             }
         }
 
-        throw new InvalidOperationException("Could not tokenize expression");
+        throw new SpdxParseException("Could not parse expression");
     }
 
     private string? ParseRef(string prefix, string[] parts)
@@ -233,7 +252,7 @@ internal sealed class Lexer
     {
         if (Current?.Type != type)
         {
-            throw new InvalidOperationException($"Expected token of type '{type}'.");
+            throw new SpdxParseException($"Expected token of type '{type}'.");
         }
     }
 

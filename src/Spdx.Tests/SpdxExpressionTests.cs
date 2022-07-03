@@ -1,121 +1,234 @@
+using System.Diagnostics.CodeAnalysis;
 using Spdx.Expressions;
-using Spdx.Expressions.Ast;
 using Spdx.Tests.Extensions;
 
 namespace Spdx.Tests
 {
     public sealed class SpdxExpressionTests
     {
-        [Fact]
-        public void Should_Parse_Expression()
+        public sealed class TheParseMethod
         {
-            // Given, When
-            var result = SpdxExpression.Parse("(MIT AND Apache-2.0+ AND DocumentRef-foo:LicenseRef-bar) WITH gnu-javamail-exception");
-
-            // When
-            result.ShouldBeOfType<SpdxWithExpression>().And(with =>
+            [Fact]
+            public void Should_Parse_Expression()
             {
-                with.Expression.ShouldBeOfType<SpdxScopeExpression>().And(scope =>
+                // Given, When
+                var result = SpdxExpression.Parse("(MIT AND Apache-2.0+ AND DocumentRef-foo:LicenseRef-bar) WITH gnu-javamail-exception");
+
+                // When
+                result.ShouldBeOfType<SpdxWithExpression>().And(with =>
                 {
-                    scope.Expression.ShouldBeOfType<SpdxAndExpression>().And(and =>
+                    with.Expression.ShouldBeOfType<SpdxScopeExpression>().And(scope =>
                     {
-                        and.Left.ShouldBeOfType<SpdxAndExpression>().And(and2 =>
+                        scope.Expression.ShouldBeOfType<SpdxAndExpression>().And(and =>
                         {
-                            and2.Left.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
+                            and.Left.ShouldBeOfType<SpdxAndExpression>().And(and2 =>
                             {
-                                node.Id.ShouldBe("MIT");
-                                node.OrLater.ShouldBe(false);
+                                and2.Left.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
+                                {
+                                    node.Id.ShouldBe("MIT");
+                                    node.OrLater.ShouldBe(false);
+                                });
+                                and2.Right.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
+                                {
+                                    node.Id.ShouldBe("Apache-2.0");
+                                    node.OrLater.ShouldBe(true);
+                                });
                             });
-                            and2.Right.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
+                            and.Right.ShouldBeOfType<SpdxLicenseReferenceExpression>().And(node =>
                             {
-                                node.Id.ShouldBe("Apache-2.0");
-                                node.OrLater.ShouldBe(true);
+                                node.DocumentReference.ShouldBe("foo");
+                                node.LicenseRef.ShouldBe("bar");
                             });
                         });
-                        and.Right.ShouldBeOfType<SpdxLicenseReferenceExpression>().And(node =>
+                    });
+
+                    with.Exception.ShouldNotBeNull().And(node => node.Id.ShouldBe("gnu-javamail-exception"));
+                });
+            }
+
+            [Fact]
+            public void Should_Parse_Expression_With_Document_And_License_Reference()
+            {
+                // Given, When
+                var result = SpdxExpression.Parse("MIT AND DocumentRef-foo:LicenseRef-bar");
+
+                // When
+                result.ShouldBeOfType<SpdxAndExpression>().And(and =>
+                {
+                    and.Left.ShouldBeOfType<SpdxLicenseExpression>().And(x => x.Id.ShouldBe("MIT"));
+                    and.Right.ShouldBeOfType<SpdxLicenseReferenceExpression>().And(reference =>
+                    {
+                        reference.DocumentReference.ShouldBe("foo");
+                        reference.LicenseRef.ShouldBe("bar");
+                    });
+                });
+            }
+
+            [Fact]
+            public void Should_Parse_Expression_With_License_Reference()
+            {
+                // Given, When
+                var result = SpdxExpression.Parse("MIT AND LicenseRef-bar");
+
+                // When
+                result.ShouldBeOfType<SpdxAndExpression>().And(and =>
+                {
+                    and.Left.ShouldBeOfType<SpdxLicenseExpression>().And(x => x.Id.ShouldBe("MIT"));
+                    and.Right.ShouldBeOfType<SpdxLicenseReferenceExpression>().And(reference =>
+                    {
+                        reference.DocumentReference.ShouldBeEmpty();
+                        reference.LicenseRef.ShouldBe("bar");
+                    });
+                });
+            }
+
+            [Fact]
+            public void Should_Consider_WITH_To_Have_Higher_Precedence()
+            {
+                // Given, When
+                var result = SpdxExpression.Parse("MIT AND Apache-2.0+ WITH gnu-javamail-exception");
+
+                // When
+                result.ShouldBeOfType<SpdxWithExpression>().And(with =>
+                {
+                    with.Expression.ShouldBeOfType<SpdxAndExpression>().And(and =>
+                    {
+                        and.Left.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
                         {
-                            node.DocumentReference.ShouldBe("foo");
-                            node.LicenseRef.ShouldBe("bar");
+                            node.Id.ShouldBe("MIT");
+                            node.OrLater.ShouldBe(false);
+                        });
+                        and.Right.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
+                        {
+                            node.Id.ShouldBe("Apache-2.0");
+                            node.OrLater.ShouldBe(true);
                         });
                     });
+
+                    with.Exception.ShouldNotBeNull().And(node => node.Id.ShouldBe("gnu-javamail-exception"));
                 });
+            }
 
-                with.Exception.ShouldNotBeNull().And(node => node.Id.ShouldBe("gnu-javamail-exception"));
-            });
-        }
-
-        [Fact]
-        public void Should_Parse_Expression_With_Document_And_License_Reference()
-        {
-            // Given, When
-            var result = SpdxExpression.Parse("MIT AND DocumentRef-foo:LicenseRef-bar");
-
-            // When
-            result.ShouldBeOfType<SpdxAndExpression>().And(and =>
+            [Fact]
+            public void Should_Return_Error_If_Right_Part_Of_WITH_Is_Not_An_Exception()
             {
-                and.Left.ShouldBeOfType<SpdxLicenseExpression>().And(x => x.Id.ShouldBe("MIT"));
-                and.Right.ShouldBeOfType<SpdxLicenseReferenceExpression>().And(reference =>
+                // Given, When
+                var result = Record.Exception(() => SpdxExpression.Parse("MIT WITH Apache-2.0+"));
+
+                // Then
+                result.ShouldNotBeNull();
+                result.Message.ShouldBe("The right side of WITH clause must be an SPDX license exception");
+            }
+
+            [Fact]
+            public void Should_Return_Error_If_License_Is_Unknown()
+            {
+                // Given, When
+                var result = Record.Exception(() => SpdxExpression.Parse("PATRIK"));
+
+                // Then
+                result.ShouldNotBeNull();
+                result.Message.ShouldBe("Invalid SPDX license 'PATRIK'");
+            }
+
+            [Theory]
+            [InlineData(SpdxParseOptions.AllowUnknownLicenses)]
+            [InlineData(SpdxParseOptions.Relaxed)]
+            public void Should_Not_Return_Error_When_License_Is_Unknown_If_Parsing_Is_Relaxed(SpdxParseOptions options)
+            {
+                // Given, When
+                var result = SpdxExpression.Parse("PATRIK", options);
+
+                // Then
+                result.ShouldNotBeNull();
+                result.ShouldBeOfType<SpdxLicenseExpression>().And(license =>
                 {
-                    reference.DocumentReference.ShouldBe("foo");
-                    reference.LicenseRef.ShouldBe("bar");
+                    license.Id.ShouldBe("PATRIK");
                 });
-            });
-        }
+            }
 
-        [Fact]
-        public void Should_Parse_Expression_With_License_Reference()
-        {
-            // Given, When
-            var result = SpdxExpression.Parse("MIT AND LicenseRef-bar");
-
-            // When
-            result.ShouldBeOfType<SpdxAndExpression>().And(and =>
+            [Fact]
+            public void Should_Return_Error_If_License_Exception_Is_Unknown()
             {
-                and.Left.ShouldBeOfType<SpdxLicenseExpression>().And(x => x.Id.ShouldBe("MIT"));
-                and.Right.ShouldBeOfType<SpdxLicenseReferenceExpression>().And(reference =>
-                {
-                    reference.DocumentReference.ShouldBeEmpty();
-                    reference.LicenseRef.ShouldBe("bar");
-                });
-            });
-        }
+                // Given, When
+                var result = Record.Exception(() => SpdxExpression.Parse("MIT WITH PATRIK"));
 
-        [Fact]
-        public void Should_Consider_WITH_To_Have_Higher_Precedence()
-        {
-            // Given, When
-            var result = SpdxExpression.Parse("MIT AND Apache-2.0+ WITH gnu-javamail-exception");
+                // Then
+                result.ShouldNotBeNull();
+                result.Message.ShouldBe("Invalid SPDX license exception 'PATRIK'");
+            }
 
-            // When
-            result.ShouldBeOfType<SpdxWithExpression>().And(with =>
+            [Theory]
+            [SuppressMessage("Usage", "xUnit1025:InlineData should be unique within the Theory it belongs to")]
+            [InlineData(SpdxParseOptions.AllowUnknownLicenses | SpdxParseOptions.AllowUnknownExceptions)]
+            [InlineData(SpdxParseOptions.Relaxed)]
+            public void Should_Not_Return_Error_If_License_Exception_Is_Unknown_If_Parsing_Is_Relaxed(SpdxParseOptions options)
             {
-                with.Expression.ShouldBeOfType<SpdxAndExpression>().And(and =>
+                // Given, When
+                var result = SpdxExpression.Parse("MIT WITH PATRIK", options);
+
+                // Then
+                result.ShouldNotBeNull();
+                result.ShouldBeOfType<SpdxWithExpression>().And(with =>
                 {
-                    and.Left.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
+                    with.Expression.ShouldBeOfType<SpdxLicenseExpression>().And(license =>
                     {
-                        node.Id.ShouldBe("MIT");
-                        node.OrLater.ShouldBe(false);
+                        license.Id.ShouldBe("MIT");
                     });
-                    and.Right.ShouldBeOfType<SpdxLicenseExpression>().And(node =>
+
+                    with.Exception.ShouldBeOfType<SpdxLicenseExceptionExpression>().And(license =>
                     {
-                        node.Id.ShouldBe("Apache-2.0");
-                        node.OrLater.ShouldBe(true);
+                        license.Id.ShouldBe("PATRIK");
                     });
                 });
-
-                with.Exception.ShouldNotBeNull().And(node => node.Id.ShouldBe("gnu-javamail-exception"));
-            });
+            }
         }
 
-        [Fact]
-        public void Should_Return_Error_If_Right_Part_Of_WITH_Is_Not_An_Exception()
+        public sealed class TheTryParseMethod
         {
-            // Given, When
-            var result = Record.Exception(() => SpdxExpression.Parse("MIT WITH Apache-2.0+"));
+            [Fact]
+            public void Should_Not_Throw_When_Encountering_Invalid_Expression()
+            {
+                // Given, When
+                var result = SpdxExpression.TryParse("FOO ORZ BAR", out var parsed);
 
-            // Then
-            result.ShouldNotBeNull();
-            result.Message.ShouldBe("The right side of WITH clause must be an SPDX license exception");
+                // Then
+                result.ShouldBeFalse();
+                parsed.ShouldBeNull();
+            }
+        }
+
+        public sealed class TheIsValidExpressionMethod
+        {
+            [Fact]
+            public void Should_Return_True_For_Valid_Expression()
+            {
+                // Given, When
+                var result = SpdxExpression.IsValidExpression("MIT OR Apache-2.0");
+
+                // Then
+                result.ShouldBeTrue();
+            }
+
+            [Fact]
+            public void Should_Return_False_For_Invalid_Expression()
+            {
+                // Given, When
+                var result = SpdxExpression.IsValidExpression("MIT OR LOL");
+
+                // Then
+                result.ShouldBeFalse();
+            }
+
+            [Fact]
+            public void Should_Return_True_For_Valid_Expression_With_Unknown_License_If_Parsing_Is_Relazed()
+            {
+                // Given, When
+                var result = SpdxExpression.IsValidExpression("MIT OR LOL", SpdxParseOptions.Relaxed);
+
+                // Then
+                result.ShouldBeTrue();
+            }
         }
     }
 }

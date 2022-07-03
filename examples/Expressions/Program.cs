@@ -1,5 +1,5 @@
 using Expressions;
-using Spdx.Expressions;
+using Spdx;
 using Spectre.Console;
 
 // Parse the expression

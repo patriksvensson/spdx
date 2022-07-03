@@ -1,4 +1,4 @@
-namespace Spdx.Expressions.Ast;
+namespace Spdx.Expressions;
 
 /// <summary>
 /// Represents a unary scope in a SPDX license expression.

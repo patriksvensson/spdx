@@ -1,4 +1,4 @@
-namespace Spdx.Expressions.Ast;
+namespace Spdx.Expressions;
 
 /// <summary>
 /// Represents a license reference node in a SPDX license expression.
