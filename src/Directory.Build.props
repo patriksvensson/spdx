@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package Information">
-    <Description>A library that contains information about SPDX libraroes.</Description>
+    <Description>A library that contains information about SPDX licenses.</Description>
     <Copyright>Patrik Svensson</Copyright>
     <Authors>Patrik Svensson</Authors>
     <RepositoryType>git</RepositoryType>
