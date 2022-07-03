@@ -39,7 +39,7 @@ public sealed class ImportCommand : AsyncCommand<ImportCommand.Settings>
         var model = JsonSerializer.Deserialize<SpdxLicenseManifest>(json);
 
         var template = Template.Parse(File.ReadAllText("Templates/Licenses.template"));
-        var result = template.Render(new { model!.Licenses });
+        var result = template.Render(new { Licenses = model!.Licenses.OrderBy(x => x.Id) });
 
         if (!string.IsNullOrWhiteSpace(settings.Output))
         {
@@ -54,7 +54,7 @@ public sealed class ImportCommand : AsyncCommand<ImportCommand.Settings>
         var model = JsonSerializer.Deserialize<SpdxExceptionsManifest>(json);
 
         var template = Template.Parse(File.ReadAllText("Templates/Exceptions.template"));
-        var result = template.Render(new { model!.Exceptions });
+        var result = template.Render(new { Exceptions = model!.Exceptions.OrderBy(x => x.Id) });
 
         if (!string.IsNullOrWhiteSpace(settings.Output))
         {
