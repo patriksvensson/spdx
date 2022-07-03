@@ -4,6 +4,12 @@ _[![Spdx NuGet Version](https://img.shields.io/nuget/v/spdx.svg?style=flat&label
 
 A library that makes it easy to retrieve information about SPDX licenses.
 
+**License database updated:** 2022-07-03
+
+## Examples
+
+See the `Examples` directory for examples of how to use this library.
+
 ## Building
 
 We're using [Cake](https://github.com/cake-build/cake) as a 
