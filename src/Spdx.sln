@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meta", "Meta", "{EDCE8EAB-7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "..\examples\Demo\Demo.csproj", "{5C667E3C-49B1-4864-BA3A-ABC2C790AE33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expressions", "..\examples\Expressions\Expressions.csproj", "{D76C7E68-0CBE-4FE5-A2E8-FDFE5E1FB8D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expressions", "..\examples\Expressions\Expressions.csproj", "{D76C7E68-0CBE-4FE5-A2E8-FDFE5E1FB8D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -21,10 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Scriban" Version="5.0.0" />
-    <PackageReference Include="Spectre.Console" Version="0.42.0" />
-    <PackageReference Include="Spectre.IO" Version="0.7.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.0" />
+    <PackageReference Include="Scriban" Version="5.4.6" />
+    <PackageReference Include="Spectre.Console" Version="0.44.0" />
+    <PackageReference Include="Spectre.IO" Version="0.8.0" />
+    <PackageReference Include="System.Text.Json" Version="6.0.5" />
   </ItemGroup>
   
 </Project>
