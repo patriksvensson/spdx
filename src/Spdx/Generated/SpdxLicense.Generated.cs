@@ -15,6 +15,11 @@ public sealed partial class SpdxLicense
     private static readonly List<SpdxLicense> _licenses;
     private static readonly Dictionary<string, SpdxLicense> _lookup;
 
+    /// <summary>
+    /// Gets the license list version.
+    /// </summary>
+    public static string LicenseListVersion { get; } = "3.18";
+
     static SpdxLicense()
     {
         _licenses = GenerateLicenseList();
@@ -111,6 +116,7 @@ public sealed partial class SpdxLicense
             new SpdxLicense("CC-BY-3.0", "Creative Commons Attribution 3.0 Unported", false, false, false),
             new SpdxLicense("CC-BY-3.0-AT", "Creative Commons Attribution 3.0 Austria", false, false, false),
             new SpdxLicense("CC-BY-3.0-DE", "Creative Commons Attribution 3.0 Germany", false, false, false),
+            new SpdxLicense("CC-BY-3.0-IGO", "Creative Commons Attribution 3.0 IGO", false, false, false),
             new SpdxLicense("CC-BY-3.0-NL", "Creative Commons Attribution 3.0 Netherlands", false, false, false),
             new SpdxLicense("CC-BY-3.0-US", "Creative Commons Attribution 3.0 United States", false, false, false),
             new SpdxLicense("CC-BY-4.0", "Creative Commons Attribution 4.0 International", false, true, false),
@@ -292,7 +298,6 @@ public sealed partial class SpdxLicense
             new SpdxLicense("JasPer-2.0", "JasPer License", false, false, false),
             new SpdxLicense("JPNIC", "Japan Network Information Center License", false, false, false),
             new SpdxLicense("JSON", "JSON License", false, false, false),
-            new SpdxLicense("KiCad-libraries-exception", "KiCad Libraries Exception", false, false, false),
             new SpdxLicense("LAL-1.2", "Licence Art Libre 1.2", false, false, false),
             new SpdxLicense("LAL-1.3", "Licence Art Libre 1.3", false, false, false),
             new SpdxLicense("Latex2e", "Latex2e License", false, false, false),
@@ -326,7 +331,10 @@ public sealed partial class SpdxLicense
             new SpdxLicense("LPPL-1.2", "LaTeX Project Public License v1.2", false, true, false),
             new SpdxLicense("LPPL-1.3a", "LaTeX Project Public License v1.3a", false, true, false),
             new SpdxLicense("LPPL-1.3c", "LaTeX Project Public License v1.3c", true, false, false),
+            new SpdxLicense("LZMA-SDK-9.11-to-9.20", "LZMA SDK License (versions 9.11 to 9.20)", false, false, false),
+            new SpdxLicense("LZMA-SDK-9.22", "LZMA SDK License (versions 9.22 and beyond)", false, false, false),
             new SpdxLicense("MakeIndex", "MakeIndex License", false, false, false),
+            new SpdxLicense("Minpack", "Minpack License", false, false, false),
             new SpdxLicense("MirOS", "The MirOS Licence", true, false, false),
             new SpdxLicense("MIT", "MIT License", true, true, false),
             new SpdxLicense("MIT-0", "MIT No Attribution", true, false, false),
@@ -338,12 +346,14 @@ public sealed partial class SpdxLicense
             new SpdxLicense("MIT-open-group", "MIT Open Group variant", false, false, false),
             new SpdxLicense("MITNFA", "MIT +no-false-attribs license", false, false, false),
             new SpdxLicense("Motosoto", "Motosoto License", true, false, false),
+            new SpdxLicense("mpi-permissive", "mpi Permissive License", false, false, false),
             new SpdxLicense("mpich2", "mpich2 License", false, false, false),
             new SpdxLicense("MPL-1.0", "Mozilla Public License 1.0", true, false, false),
             new SpdxLicense("MPL-1.1", "Mozilla Public License 1.1", true, true, false),
             new SpdxLicense("MPL-2.0", "Mozilla Public License 2.0", true, true, false),
             new SpdxLicense("MPL-2.0-no-copyleft-exception", "Mozilla Public License 2.0 (no copyleft exception)", true, false, false),
             new SpdxLicense("mplus", "mplus Font License", false, false, false),
+            new SpdxLicense("MS-LPL", "Microsoft Limited Public License", false, false, false),
             new SpdxLicense("MS-PL", "Microsoft Public License", true, true, false),
             new SpdxLicense("MS-RL", "Microsoft Reciprocal License", true, true, false),
             new SpdxLicense("MTLL", "Matrix Template Library License", false, false, false),
@@ -361,6 +371,7 @@ public sealed partial class SpdxLicense
             new SpdxLicense("NetCDF", "NetCDF license", false, false, false),
             new SpdxLicense("Newsletr", "Newsletr License", false, false, false),
             new SpdxLicense("NGPL", "Nethack General Public License", true, false, false),
+            new SpdxLicense("NICTA-1.0", "NICTA Public Software License, Version 1.0", false, false, false),
             new SpdxLicense("NIST-PD", "NIST Public Domain Notice", false, false, false),
             new SpdxLicense("NIST-PD-fallback", "NIST Public Domain Notice with license fallback", false, false, false),
             new SpdxLicense("NLOD-1.0", "Norwegian Licence for Open Government Data (NLOD) 1.0", false, false, false),
@@ -433,6 +444,7 @@ public sealed partial class SpdxLicense
             new SpdxLicense("psfrag", "psfrag License", false, false, false),
             new SpdxLicense("psutils", "psutils License", false, false, false),
             new SpdxLicense("Python-2.0", "Python License 2.0", true, true, false),
+            new SpdxLicense("Python-2.0.1", "Python License 2.0.1", false, false, false),
             new SpdxLicense("Qhull", "Qhull License", false, false, false),
             new SpdxLicense("QPL-1.0", "Q Public License 1.0", true, true, false),
             new SpdxLicense("Rdisc", "Rdisc License", false, false, false),

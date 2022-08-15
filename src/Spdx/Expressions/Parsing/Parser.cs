@@ -2,13 +2,13 @@ namespace Spdx.Expressions;
 
 internal static class Parser
 {
-    public static SpdxExpression Parse(Lexer lexer, SpdxParseOptions options)
+    public static SpdxExpression Parse(Lexer lexer, SpdxLicenseParseOptions options)
     {
         lexer.MoveNext();
         return ParseExpression(lexer, options);
     }
 
-    private static SpdxExpression ParseExpression(Lexer lexer, SpdxParseOptions options)
+    private static SpdxExpression ParseExpression(Lexer lexer, SpdxLicenseParseOptions options)
     {
         var expression = ParseAnd(lexer, options);
         if (lexer.Current?.Type == TokenType.With)
@@ -18,7 +18,7 @@ internal static class Parser
             var right = ParsePredicate(lexer, options);
             if (right is not SpdxLicenseExceptionExpression exception)
             {
-                if (right is SpdxLicenseExpression license && options.HasFlag(SpdxParseOptions.AllowUnknownExceptions))
+                if (right is SpdxLicenseExpression license && options.HasFlag(SpdxLicenseParseOptions.AllowUnknownExceptions))
                 {
                     exception = new SpdxLicenseExceptionExpression(license.Id);
                 }
@@ -34,7 +34,7 @@ internal static class Parser
         return expression;
     }
 
-    private static SpdxExpression ParseAnd(Lexer lexer, SpdxParseOptions options)
+    private static SpdxExpression ParseAnd(Lexer lexer, SpdxLicenseParseOptions options)
     {
         var expression = ParseOr(lexer, options);
         while (lexer.Current?.Type == TokenType.And)
@@ -46,7 +46,7 @@ internal static class Parser
         return expression;
     }
 
-    private static SpdxExpression ParseOr(Lexer lexer, SpdxParseOptions options)
+    private static SpdxExpression ParseOr(Lexer lexer, SpdxLicenseParseOptions options)
     {
         var expression = ParsePredicate(lexer, options);
         while (lexer.Current?.Type == TokenType.Or)
@@ -58,7 +58,7 @@ internal static class Parser
         return expression;
     }
 
-    private static SpdxExpression ParsePredicate(Lexer lexer, SpdxParseOptions options)
+    private static SpdxExpression ParsePredicate(Lexer lexer, SpdxLicenseParseOptions options)
     {
         if (lexer.Current != null)
         {
@@ -93,7 +93,7 @@ internal static class Parser
         throw new SpdxParseException("Encountered unexpected end of expression.");
     }
 
-    private static SpdxExpression ParseScopeExpression(Lexer lexer, SpdxParseOptions options)
+    private static SpdxExpression ParseScopeExpression(Lexer lexer, SpdxLicenseParseOptions options)
     {
         lexer.Consume(TokenType.LParen);
         var expression = ParseExpression(lexer, options);

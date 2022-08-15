@@ -39,7 +39,7 @@ public sealed class ImportCommand : AsyncCommand<ImportCommand.Settings>
         var model = JsonSerializer.Deserialize<SpdxLicenseManifest>(json);
 
         var template = Template.Parse(File.ReadAllText("Templates/Licenses.template"));
-        var result = template.Render(new { Licenses = model!.Licenses.OrderBy(x => x.Id) });
+        var result = template.Render(new { Version = model!.Version, Licenses = model!.Licenses.OrderBy(x => x.Id) });
 
         if (!string.IsNullOrWhiteSpace(settings.Output))
         {
