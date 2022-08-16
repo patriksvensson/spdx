@@ -13,7 +13,7 @@ public sealed class SpdxDocument
     public SpdxCreationInfo CreationInfo { get; }
 
     // Optional
-    public IReadOnlyList<SpdxExternalDocumentRef> ExternalDocumentRefs { get; } // TODO: Need class
+    public IReadOnlyList<SpdxExternalDocumentRef> ExternalDocumentRefs { get; }
     public string? Comment { get; }
 
     public SpdxDocument(
