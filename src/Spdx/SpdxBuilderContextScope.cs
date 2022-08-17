@@ -1,4 +1,4 @@
-﻿namespace Spdx.Internal;
+namespace Spdx.Internal;
 
 internal sealed class SpdxBuilderContextScope : IDisposable
 {
@@ -21,6 +21,12 @@ internal sealed class SpdxBuilderContextScope : IDisposable
         }
 
         _context.AddDiagnostic(diagnostic);
+    }
+
+    // TODO: Make extension method
+    public void AddError(string message)
+    {
+        _context.AddDiagnostic(new SpdxDiagnostic(SpdxDiagnosticKind.Error, message));
     }
 
     public void Dispose()

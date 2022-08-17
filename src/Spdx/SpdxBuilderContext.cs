@@ -1,4 +1,4 @@
-﻿namespace Spdx.Internal;
+namespace Spdx.Internal;
 
 internal sealed class SpdxBuilderContext
 {
@@ -18,5 +18,11 @@ internal sealed class SpdxBuilderContext
     public void AddDiagnostic(SpdxDiagnostic diagnostic)
     {
         Diagnostics.Add(diagnostic);
+    }
+
+    // TODO: Make extension method
+    public void AddError(string message)
+    {
+        Diagnostics.Add(new SpdxDiagnostic(SpdxDiagnosticKind.Error, message));
     }
 }

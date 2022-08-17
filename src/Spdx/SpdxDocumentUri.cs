@@ -63,7 +63,7 @@ public sealed class SpdxDocumentUri
     public static SpdxDocumentUri FromDocumentName(string documentName, Guid? uuid = null)
     {
         uuid ??= Guid.NewGuid();
-        return new SpdxDocumentUri("http://", "spdx.org", "spdxdocs", documentName, uuid.Value.ToString("D").ToUpperInvariant());
+        return new SpdxDocumentUri("http", "spdx.org", "spdxdocs", documentName, uuid.Value.ToString("D").ToUpperInvariant());
     }
 
     public override string ToString()

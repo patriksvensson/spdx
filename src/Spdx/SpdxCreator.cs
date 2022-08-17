@@ -11,12 +11,12 @@ public abstract class SpdxCreator
         Name = name ?? throw new ArgumentNullException(nameof(name));
     }
 
-    public static SpdxCreator Person(string name, string? email)
+    public static SpdxCreator Person(string name, string? email = null)
     {
         return new SpdxPerson(name, email);
     }
 
-    public static SpdxCreator Organization(string name, string? email)
+    public static SpdxCreator Organization(string name, string? email = null)
     {
         return new SpdxOrganization(name, email);
     }
