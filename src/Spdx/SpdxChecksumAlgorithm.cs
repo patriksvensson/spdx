@@ -1,5 +1,6 @@
-﻿namespace Spdx;
+namespace Spdx;
 
+#pragma warning disable SA1602 // Enumeration items should be documented
 public enum SpdxChecksumAlgorithm
 {
     SHA1,
@@ -12,3 +13,4 @@ public enum SpdxChecksumAlgorithm
     MD5,
     MD6,
 }
+#pragma warning restore SA1602 // Enumeration items should be documented

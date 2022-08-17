@@ -1,34 +1,60 @@
 namespace Spdx;
 
-public sealed class SpdxDocument
+public sealed class SpdxDocument : ISpdxValidatable
 {
     // Constants
     public string Version { get; } = "SPDX-2.2";
     public string DataLicense { get; } = "CC0-1.0";
 
     // Required
-    public string Identifier { get; }
-    public string Name { get; }
-    public SpdxDocumentUri Namespace { get; }
-    public SpdxCreationInfo CreationInfo { get; }
+    public string? Identifier { get; set; }
+    public string? Name { get; set; }
+    public SpdxDocumentUri? Namespace { get; set; }
+    public SpdxCreationInfo? CreationInfo { get; set; }
 
     // Optional
-    public IReadOnlyList<SpdxExternalDocumentRef> ExternalDocumentRefs { get; }
-    public string? Comment { get; }
+    public List<SpdxExternalDocumentRef> ExternalDocumentRefs { get; init; } = new List<SpdxExternalDocumentRef>();
+    public string? Comment { get; set; }
 
-    public SpdxDocument(
-        string identifier,
-        string name,
-        SpdxDocumentUri @namespace,
-        SpdxCreationInfo creationInfo,
-        IEnumerable<SpdxExternalDocumentRef> externalDocumentRefs,
-        string? comment)
+    public SpdxValidationReport Validate()
     {
-        Identifier = identifier ?? throw new ArgumentNullException(nameof(identifier));
-        Name = name ?? throw new ArgumentNullException(nameof(name));
-        Namespace = @namespace ?? throw new ArgumentNullException(nameof(@namespace));
-        CreationInfo = creationInfo ?? throw new ArgumentNullException(nameof(creationInfo));
-        ExternalDocumentRefs = new List<SpdxExternalDocumentRef>(externalDocumentRefs);
-        Comment = comment;
+        var context = new SpdxValidationContext();
+        ((ISpdxValidatable)this).Validate(context);
+        return context.CreateReport();
+    }
+
+    public string Serialize()
+    {
+        return SpdxTagSerializer.Shared.Serialize(this);
+    }
+
+    void ISpdxValidatable.Validate(SpdxValidationContext context)
+    {
+        if (string.IsNullOrWhiteSpace(Identifier))
+        {
+            context.AddError("Identifier is missing");
+        }
+
+        if (string.IsNullOrWhiteSpace(Name))
+        {
+            context.AddError("Name is missing");
+        }
+
+        if (Namespace == null)
+        {
+            context.AddError("Namespace is missing");
+        }
+
+        if (CreationInfo == null)
+        {
+            context.AddError("Creation info is missing");
+        }
+        else
+        {
+            using (context.PushPath("CreationInfo"))
+            {
+                ((ISpdxValidatable)CreationInfo).Validate(context);
+            }
+        }
     }
 }
