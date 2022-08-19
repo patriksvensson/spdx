@@ -1,0 +1,107 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "name": "hades",
+  "documentNamespace": "http://spdx.org/spdxdocs/hades-9906A8B7-A923-40B6-ACC1-4D36F7E1FF6D",
+  "creationInfo": {
+    "licenseListVersion": "3.18",
+    "created": "2020-08-19T19:44:12Z",
+    "creators": [
+      "Person: Patrik Svensson (patrik@patriksvensson.se)",
+      "Organization: Spectre Systems AB ()"
+    ]
+  },
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Hades",
+      "name": "Hades",
+      "copyrightText": "Copyright 2022 Patrik Svensson",
+      "downloadLocation": "http://example.com/Hades/Download",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT"
+    },
+    {
+      "SPDXID": "SPDXRef-Foo",
+      "name": "Foo",
+      "versionInfo": "3.2.1",
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "85ed0817af83a24ad8da68c2b5094de69833983c"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "11b6d3ee554eedf79299905a98f9b9a04e498210b59f15094c916c91d150efcd"
+        }
+      ],
+      "copyrightText": "Copyright 2021-2022 John Smith",
+      "downloadLocation": "http://example.com/Foo/Download",
+      "filesAnalyzed": true,
+      "licenseConcluded": "(MIT OR Apache-2.0)",
+      "licenseDeclared": "(Apache-2.0 OR MIT)",
+      "supplier": "Person: John Smith (john.smith@example.com)",
+      "packageVerificationCode": {
+        "packageVerificationCodeValue": "d6a770ba38583ed4bb4525bd96e50461655d2758",
+        "packageVerificationCodeExcludedFiles": [
+          "./package.spdx"
+        ]
+      },
+      "licenseInfoFromFiles": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:qux/Foo@3.2.1"
+        },
+        {
+          "referenceCategory": "OTHER",
+          "referenceType": "website",
+          "referenceLocator": "http://example.com/Foo"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "SPDXID": "SPDXRef-BuildScript",
+      "fileName": "build.cake",
+      "copyrightText": "Copyright 2021-2022 Jabe Smith",
+      "licenseConcluded": "MIT",
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "2fd4e1c67a2d28fced849ee1bb76e7391b93eb12"
+        }
+      ],
+      "fileTypes": [
+        "SOURCE"
+      ],
+      "licenseInfoInFiles": [
+        "MIT",
+        "Apache-2.0"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relatedSpdxElement": "SPDXRef-Hades",
+      "relationshipType": "DESCRIBES"
+    },
+    {
+      "spdxElementId": "SPDXRef-Hades",
+      "relatedSpdxElement": "SPDXRef-Foo",
+      "relationshipType": "DEPENDS_ON"
+    },
+    {
+      "spdxElementId": "SPDXRef-BuildScript",
+      "relatedSpdxElement": "SPDXRef-Hades",
+      "relationshipType": "BUILD_TOOL_OF"
+    }
+  ]
+}

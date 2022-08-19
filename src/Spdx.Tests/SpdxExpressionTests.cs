@@ -131,20 +131,28 @@ namespace Spdx.Tests
                 result.Message.ShouldBe("Invalid SPDX license 'PATRIK'");
             }
 
-            [Theory]
-            [InlineData(SpdxParseOptions.AllowUnknownLicenses)]
-            [InlineData(SpdxParseOptions.Relaxed)]
-            public void Should_Not_Return_Error_When_License_Is_Unknown_If_Parsing_Is_Relaxed(SpdxParseOptions options)
+            [Fact]
+            public void Should_Not_Return_Error_When_License_Is_Unknown_If_Parsing_Allows_Unknown_Licenses()
             {
                 // Given, When
-                var result = SpdxExpression.Parse("PATRIK", options);
+                var result = SpdxExpression.Parse("PATRIK", SpdxLicenseOptions.AllowUnknownLicenses);
 
                 // Then
                 result.ShouldNotBeNull();
-                result.ShouldBeOfType<SpdxLicenseExpression>().And(license =>
-                {
-                    license.Id.ShouldBe("PATRIK");
-                });
+                result.ShouldBeOfType<SpdxLicenseExpression>()
+                    .And(license => license.Id.ShouldBe("PATRIK"));
+            }
+
+            [Fact]
+            public void Should_Not_Return_Error_When_License_Is_Unknown_If_Parsing_Is_Relaxed()
+            {
+                // Given, When
+                var result = SpdxExpression.Parse("PATRIK", SpdxLicenseOptions.Relaxed);
+
+                // Then
+                result.ShouldNotBeNull();
+                result.ShouldBeOfType<SpdxLicenseExpression>()
+                    .And(license => license.Id.ShouldBe("PATRIK"));
             }
 
             [Fact]
@@ -160,9 +168,9 @@ namespace Spdx.Tests
 
             [Theory]
             [SuppressMessage("Usage", "xUnit1025:InlineData should be unique within the Theory it belongs to")]
-            [InlineData(SpdxParseOptions.AllowUnknownLicenses | SpdxParseOptions.AllowUnknownExceptions)]
-            [InlineData(SpdxParseOptions.Relaxed)]
-            public void Should_Not_Return_Error_If_License_Exception_Is_Unknown_If_Parsing_Is_Relaxed(SpdxParseOptions options)
+            [InlineData(SpdxLicenseOptions.AllowUnknownLicenses | SpdxLicenseOptions.AllowUnknownExceptions)]
+            [InlineData(SpdxLicenseOptions.Relaxed)]
+            public void Should_Not_Return_Error_If_License_Exception_Is_Unknown_If_Parsing_Is_Relaxed(SpdxLicenseOptions options)
             {
                 // Given, When
                 var result = SpdxExpression.Parse("MIT WITH PATRIK", options);
@@ -171,15 +179,11 @@ namespace Spdx.Tests
                 result.ShouldNotBeNull();
                 result.ShouldBeOfType<SpdxWithExpression>().And(with =>
                 {
-                    with.Expression.ShouldBeOfType<SpdxLicenseExpression>().And(license =>
-                    {
-                        license.Id.ShouldBe("MIT");
-                    });
+                    with.Expression.ShouldBeOfType<SpdxLicenseExpression>()
+                        .And(license => license.Id.ShouldBe("MIT"));
 
-                    with.Exception.ShouldBeOfType<SpdxLicenseExceptionExpression>().And(license =>
-                    {
-                        license.Id.ShouldBe("PATRIK");
-                    });
+                    with.Exception.ShouldBeOfType<SpdxLicenseExceptionExpression>()
+                        .And(license => license.Id.ShouldBe("PATRIK"));
                 });
             }
         }
@@ -224,7 +228,7 @@ namespace Spdx.Tests
             public void Should_Return_True_For_Valid_Expression_With_Unknown_License_If_Parsing_Is_Relazed()
             {
                 // Given, When
-                var result = SpdxExpression.IsValidExpression("MIT OR LOL", SpdxParseOptions.Relaxed);
+                var result = SpdxExpression.IsValidExpression("MIT OR LOL", SpdxLicenseOptions.Relaxed);
 
                 // Then
                 result.ShouldBeTrue();

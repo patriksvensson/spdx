@@ -4,7 +4,7 @@ namespace Spdx.Expressions;
 /// Represent options provided to the SPDX expression parser.
 /// </summary>
 [Flags]
-public enum SpdxParseOptions
+public enum SpdxLicenseOptions
 {
     /// <summary>
     /// Strict parsing (default).

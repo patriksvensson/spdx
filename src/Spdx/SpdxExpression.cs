@@ -15,7 +15,7 @@ public abstract class SpdxExpression
     /// <returns>An abstract syntax tree representing the original expression.</returns>
     public static SpdxExpression Parse(string expression)
     {
-        return Parse(expression, SpdxParseOptions.Strict);
+        return Parse(expression, SpdxLicenseOptions.Strict);
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public abstract class SpdxExpression
     /// <param name="expression">The expression to parse.</param>
     /// <param name="options">The options to use when parsing the expression.</param>
     /// <returns>An abstract syntax tree representing the original expression.</returns>
-    public static SpdxExpression Parse(string expression, SpdxParseOptions options)
+    public static SpdxExpression Parse(string expression, SpdxLicenseOptions options)
     {
         var lexer = new Lexer(expression, options);
         return Parser.Parse(lexer, options);
@@ -46,7 +46,7 @@ public abstract class SpdxExpression
     /// </returns>
     public static bool TryParse(string expression, out SpdxExpression? result)
     {
-        return TryParse(expression, SpdxParseOptions.Strict, out result);
+        return TryParse(expression, SpdxLicenseOptions.Strict, out result);
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public abstract class SpdxExpression
     /// <returns>
     /// <c>true</c> if <paramref name="expression"/> was parsed successfully; otherwise, <c>false</c>.
     /// </returns>
-    public static bool TryParse(string expression, SpdxParseOptions options, out SpdxExpression? result)
+    public static bool TryParse(string expression, SpdxLicenseOptions options, out SpdxExpression? result)
     {
         try
         {
@@ -97,7 +97,7 @@ public abstract class SpdxExpression
     /// <returns>
     /// <c>true</c> if <paramref name="expression"/> was parsed successfully; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsValidExpression(string expression, SpdxParseOptions options)
+    public static bool IsValidExpression(string expression, SpdxLicenseOptions options)
     {
         return TryParse(expression, options, out var _);
     }
