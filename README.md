@@ -2,9 +2,15 @@
 
 _[![Spdx NuGet Version](https://img.shields.io/nuget/v/spdx.svg?style=flat&label=NuGet%3A%20Spdx)](https://www.nuget.org/packages/spdx)_
 
-A library that makes it easy to retrieve information about SPDX licenses.
+An (unoffical) library for working with [SPDX](https://spdx.dev/) (Software Package Data Exchange).
 
-**License database updated:** 2022-07-03
+**License database version:** 3.18
+
+# Features
+
+* Retrieve information about SPDX licenses
+* Parse SPDX license expressions
+* Create SPDX documents
 
 ## Examples
 

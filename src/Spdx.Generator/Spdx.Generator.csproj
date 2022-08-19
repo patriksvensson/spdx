@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Octokit" Version="2.0.1" />
     <PackageReference Include="Scriban" Version="5.4.6" />
     <PackageReference Include="Spectre.Console" Version="0.44.0" />
     <PackageReference Include="Spectre.IO" Version="0.8.0" />

@@ -15,6 +15,11 @@ public sealed partial class SpdxLicense
     private static readonly List<SpdxLicense> _licenses;
     private static readonly Dictionary<string, SpdxLicense> _lookup;
 
+    /// <summary>
+    /// Gets the license list version.
+    /// </summary>
+    public static string LicenseListVersion { get; } = "{{ version }}";
+
     static SpdxLicense()
     {
         _licenses = GenerateLicenseList();

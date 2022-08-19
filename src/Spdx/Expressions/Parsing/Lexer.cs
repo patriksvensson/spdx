@@ -4,12 +4,12 @@ internal sealed class Lexer
 {
     private readonly TextBuffer _buffer;
     private readonly Queue<Token> _queue;
-    private readonly SpdxParseOptions _options;
+    private readonly SpdxLicenseOptions _options;
 
     public Token? Current { get; private set; }
     public Token? Previous { get; private set; }
 
-    public Lexer(string expression, SpdxParseOptions options)
+    public Lexer(string expression, SpdxLicenseOptions options)
     {
         _buffer = new TextBuffer(expression);
         _queue = new Queue<Token>();
@@ -196,9 +196,9 @@ internal sealed class Lexer
                             return true;
                         }
 
-                        if (Previous != null && Previous.Type == TokenType.With)
+                        if (Previous?.Type == TokenType.With)
                         {
-                            if (_options.HasFlag(SpdxParseOptions.AllowUnknownExceptions))
+                            if (_options.HasFlag(SpdxLicenseOptions.AllowUnknownExceptions))
                             {
                                 token = new Token(TokenType.Exception, text);
                                 return true;
@@ -207,7 +207,7 @@ internal sealed class Lexer
                             throw new SpdxParseException($"Invalid SPDX license exception '{text}'");
                         }
 
-                        if (_options.HasFlag(SpdxParseOptions.AllowUnknownLicenses))
+                        if (_options.HasFlag(SpdxLicenseOptions.AllowUnknownLicenses))
                         {
                             token = new Token(TokenType.LicenseId, text);
                             return true;
@@ -235,7 +235,7 @@ internal sealed class Lexer
         throw new SpdxParseException("Could not parse expression");
     }
 
-    private string? ParseRef(string prefix, string[] parts)
+    private static string? ParseRef(string prefix, string[] parts)
     {
         foreach (var part in parts)
         {
