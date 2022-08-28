@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Spdx.Expressions;
 using Spdx.Tests.Extensions;
 
@@ -166,14 +165,11 @@ namespace Spdx.Tests
                 result.Message.ShouldBe("Invalid SPDX license exception 'PATRIK'");
             }
 
-            [Theory]
-            [SuppressMessage("Usage", "xUnit1025:InlineData should be unique within the Theory it belongs to")]
-            [InlineData(SpdxLicenseOptions.AllowUnknownLicenses | SpdxLicenseOptions.AllowUnknownExceptions)]
-            [InlineData(SpdxLicenseOptions.Relaxed)]
-            public void Should_Not_Return_Error_If_License_Exception_Is_Unknown_If_Parsing_Is_Relaxed(SpdxLicenseOptions options)
+            [Fact]
+            public void Should_Not_Return_Error_If_License_Exception_Is_Unknown_If_Parsing_Is_Relaxed()
             {
                 // Given, When
-                var result = SpdxExpression.Parse("MIT WITH PATRIK", options);
+                var result = SpdxExpression.Parse("MIT WITH PATRIK", SpdxLicenseOptions.Relaxed);
 
                 // Then
                 result.ShouldNotBeNull();

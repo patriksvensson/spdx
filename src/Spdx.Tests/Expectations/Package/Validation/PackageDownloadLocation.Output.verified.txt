@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Package download location is required,
+      Context: {
+        Hint: See property 'PackageDownloadLocation',
+        Link: https://spdx.github.io/spdx-spec/package-information/#77-package-download-location-field,
+        Path: Document::Packages::[1]::PackageDownloadLocation
+      }
+    }
+  ]
+}

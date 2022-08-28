@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: SPDX Version is required,
+      Context: {
+        Hint: See property 'SpdxVersion',
+        Link: https://spdx.github.io/spdx-spec/document-creation-information/#61-spdx-version-field,
+        Path: Document::SpdxVersion
+      }
+    }
+  ]
+}

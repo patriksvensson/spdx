@@ -1,0 +1,13 @@
+﻿{
+  Successful: false,
+  Errors: [
+    {
+      Message: Concluded license for file is required,
+      Context: {
+        Hint: See property 'LicenseConcluded',
+        Link: https://spdx.github.io/spdx-spec/file-information/#85-concluded-license-field,
+        Path: Document::Files::[0]::LicenseConcluded
+      }
+    }
+  ]
+}

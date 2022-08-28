@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Document name is required,
+      Context: {
+        Hint: See property 'DocumentName',
+        Link: https://spdx.github.io/spdx-spec/document-creation-information/#64-document-name-field,
+        Path: Document::DocumentName
+      }
+    }
+  ]
+}

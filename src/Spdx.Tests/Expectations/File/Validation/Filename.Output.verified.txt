@@ -1,0 +1,13 @@
+﻿{
+  Successful: false,
+  Errors: [
+    {
+      Message: Filename is required,
+      Context: {
+        Hint: See property 'Filename',
+        Link: https://spdx.github.io/spdx-spec/file-information/#81-file-name-field,
+        Path: Document::Files::[0]::Filename
+      }
+    }
+  ]
+}
