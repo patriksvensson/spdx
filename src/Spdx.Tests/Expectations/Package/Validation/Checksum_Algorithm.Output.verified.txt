@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Checksum algorithm is required,
+      Context: {
+        Accepted: SHA1, SHA224, SHA256, SHA384, SHA512, MD2, MD4, MD5, MD6,
+        Hint: See property 'Algorithm',
+        Path: Document::Packages::[1]::Checksums::[0]::Algorithm
+      }
+    }
+  ]
+}

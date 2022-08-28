@@ -1,0 +1,12 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Document creation information is required,
+      Context: {
+        Hint: See property 'CreationInfo',
+        Path: Document::CreationInfo
+      }
+    }
+  ]
+}

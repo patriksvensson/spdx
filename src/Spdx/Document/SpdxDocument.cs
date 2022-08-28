@@ -1,5 +1,3 @@
-using Spdx.Serialization;
-
 namespace Spdx.Document;
 
 /// <summary>
@@ -16,7 +14,7 @@ public sealed class SpdxDocument
     /// versions are made (one or more sections are created, modified or deleted).
     /// </summary>
     /// <example>SPDX-2.2</example>
-    public string Version { get; set; } = "SPDX-2.2";
+    public string SpdxVersion { get; set; } = "SPDX-2.2";
 
     /// <summary>
     /// Gets or sets the data license.
@@ -53,7 +51,7 @@ public sealed class SpdxDocument
     /// <summary>
     /// Gets or sets the name of this document as designated by creator.
     /// </summary>
-    public string Name { get; set; } = null!;
+    public string DocumentName { get; set; } = null!;
 
     /// <summary>
     /// <para>
@@ -72,7 +70,7 @@ public sealed class SpdxDocument
     /// </para>
     /// </summary>
     /// <example>http://spdx.org/spdxdocs/hades-v1.2-9906A8B7-A923-40B6-ACC1-4D36F7E1FF6D</example>
-    public string Namespace { get; set; } = null!;
+    public string DocumentNamespace { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the creation info for the document.
@@ -95,11 +93,54 @@ public sealed class SpdxDocument
     public List<SpdxRelationship> Relationships { get; set; } = new List<SpdxRelationship>();
 
     /// <summary>
-    /// Serializes the document to JSON.
+    /// Serializes the SPDX document to JSON.
     /// </summary>
-    /// <returns>A string containing a JSON representation of the SPDX document.</returns>
-    public string ToJson()
+    /// <param name="format">The SPDX document output format.</param>
+    /// <returns>A string containing the serialized representation of the SPDX document.</returns>
+    public string Serialize(SpdxDocumentFormat format)
     {
-        return SpdxJsonSerializer.Serialize(this);
+        var result = SpdxSerializer.Serialize(this, format, out var report, out var output, out var exception);
+        if (result)
+        {
+            return output!;
+        }
+
+        if (exception != null)
+        {
+            throw new SpdxSerializationException("An error occured during serialization", exception);
+        }
+        else
+        {
+            throw new SpdxSerializationException("The SPDX document is not valid. See report for more information", report);
+        }
+    }
+
+    /// <summary>
+    /// Serializes the SPDX document to the specified format.
+    /// A return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="format">The SPDX document output format.</param>
+    /// <param name="output">
+    /// A string containing the serialized representation of the SPDX document,
+    /// or <c>null</c> if serialization failed.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the SPDX document was serialized successfully;
+    /// otherwise, <c>false</c>.
+    /// </returns>
+    public bool TrySerialize(SpdxDocumentFormat format, out string? output)
+    {
+        return SpdxSerializer.Serialize(this, format, out _, out output, out _);
+    }
+
+    /// <summary>
+    /// Performs validation of the current document.
+    /// </summary>
+    /// <returns>A <see cref="SpdxValidationReport"/>.</returns>
+    public SpdxValidationReport Validate()
+    {
+        var context = new SpdxValidationContext();
+        SpdxValidator.Validate(context, this);
+        return context.CreateReport();
     }
 }

@@ -1,21 +1,25 @@
 using System.Globalization;
-using Spdx.Document;
 
-namespace Spdx.Serialization;
+namespace Spdx.Document;
 
 internal sealed class SpdxJsonSerializer
 {
     public static string Serialize(SpdxDocument document)
     {
+        if (document is null)
+        {
+            throw new ArgumentNullException(nameof(document));
+        }
+
         using (var writer = new JsonWriterEx())
         {
             using (writer.WriteObject())
             {
                 writer.WriteProperty("SPDXID", document.SpdxId);
-                writer.WriteProperty("spdxVersion", document.Version);
+                writer.WriteProperty("spdxVersion", document.SpdxVersion);
                 writer.WriteProperty("dataLicense", document.DataLicense);
-                writer.WriteProperty("name", document.Name);
-                writer.WriteProperty("documentNamespace", document.Namespace);
+                writer.WriteProperty("name", document.DocumentName);
+                writer.WriteProperty("documentNamespace", document.DocumentNamespace);
 
                 if (document.CreationInfo != null)
                 {
@@ -111,7 +115,7 @@ internal sealed class SpdxJsonSerializer
             }
 
             writer.WriteProperty("copyrightText", package.CopyrightText);
-            writer.WriteProperty("downloadLocation", package.DownloadLocation);
+            writer.WriteProperty("downloadLocation", package.PackageDownloadLocation);
             writer.WriteProperty("filesAnalyzed", package.FilesAnalyzed);
             writer.WriteProperty("licenseConcluded", package.LicenseConcluded);
             writer.WriteProperty("licenseDeclared", package.LicenseDeclared);

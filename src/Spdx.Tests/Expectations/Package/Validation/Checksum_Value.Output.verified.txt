@@ -1,0 +1,12 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Checksum value is required,
+      Context: {
+        Hint: See property 'Value',
+        Path: Document::Packages::[1]::Checksums::[0]::Value
+      }
+    }
+  ]
+}

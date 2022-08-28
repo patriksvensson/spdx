@@ -44,7 +44,7 @@ public sealed class SpdxPackage
     /// </list>
     /// </para>
     /// </summary>
-    public string DownloadLocation { get; set; } = null!;
+    public string PackageDownloadLocation { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets a value indicating whether the file content of this package has been available for

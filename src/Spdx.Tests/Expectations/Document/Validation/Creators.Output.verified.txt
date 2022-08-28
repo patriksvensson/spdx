@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: At least one creator is required,
+      Context: {
+        Hint: See property 'Creators',
+        Link: https://spdx.github.io/spdx-spec/document-creation-information/#68-creator-field,
+        Path: Document::CreationInfo::Creators
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: SPDX identifier is required,
+      Context: {
+        Hint: See property 'SpdxId',
+        Link: https://spdx.github.io/spdx-spec/document-creation-information/#63-spdx-identifier-field,
+        Path: Document::SpdxId
+      }
+    }
+  ]
+}

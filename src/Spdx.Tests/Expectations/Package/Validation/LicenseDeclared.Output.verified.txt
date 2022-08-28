@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Declared license for package is required,
+      Context: {
+        Hint: See property 'LicenseDeclared',
+        Link: https://spdx.github.io/spdx-spec/package-information/#715-declared-license-field,
+        Path: Document::Packages::[1]::LicenseDeclared
+      }
+    }
+  ]
+}

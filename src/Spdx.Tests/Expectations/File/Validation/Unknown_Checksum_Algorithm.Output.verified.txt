@@ -1,0 +1,21 @@
+﻿{
+  Successful: false,
+  Errors: [
+    {
+      Message: Unknown checksum algorithm 'FOO',
+      Context: {
+        Accepted: SHA1, SHA224, SHA256, SHA384, SHA512, MD2, MD4, MD5, MD6,
+        Hint: See property 'Algorithm',
+        Path: Document::Files::[0]::Checksums::[0]::Algorithm
+      }
+    },
+    {
+      Message: If checksums are present, at least one need to be SHA1,
+      Context: {
+        Hint: See property 'Checksums',
+        Link: https://spdx.github.io/spdx-spec/file-information/#84-file-checksum-field,
+        Path: Document::Files::[0]::Checksums
+      }
+    }
+  ]
+}

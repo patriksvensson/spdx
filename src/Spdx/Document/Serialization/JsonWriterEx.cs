@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Spdx.Serialization;
+namespace Spdx.Document;
 
 internal sealed class JsonWriterEx : IDisposable
 {
