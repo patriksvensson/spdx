@@ -4,7 +4,11 @@ namespace Spdx.Document;
 
 internal sealed class SpdxJsonSerializer
 {
-    public static string Serialize(SpdxDocument document)
+    public static string Serialize<TPackage, TFile, TRelationship>(
+        SpdxDocument<TPackage, TFile, TRelationship> document)
+            where TPackage : SpdxPackage
+            where TFile : SpdxFile
+            where TRelationship : SpdxRelationship
     {
         if (document is null)
         {
@@ -96,7 +100,7 @@ internal sealed class SpdxJsonSerializer
         using (writer.WriteObject())
         {
             writer.WriteProperty("SPDXID", package.SpdxId);
-            writer.WriteProperty("name", package.Name);
+            writer.WriteProperty("name", package.PackageName);
             writer.WriteProperty("versionInfo", package.VersionInfo);
 
             if (package.Checksums?.Count > 0)

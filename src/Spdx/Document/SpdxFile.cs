@@ -3,7 +3,7 @@ namespace Spdx.Document;
 /// <summary>
 /// Represents a SPDX file.
 /// </summary>
-public sealed class SpdxFile
+public class SpdxFile
 {
     /// <summary>
     /// Gets or sets the full path and filename that corresponds to the file

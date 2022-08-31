@@ -2,7 +2,12 @@ namespace Spdx.Document;
 
 internal static class SpdxValidator
 {
-    public static void Validate(SpdxValidationContext context, SpdxDocument document)
+    public static void Validate<TPackage, TFile, TRelationship>(
+        SpdxValidationContext context,
+        SpdxDocument<TPackage, TFile, TRelationship> document)
+            where TPackage : SpdxPackage
+            where TFile : SpdxFile
+            where TRelationship : SpdxRelationship
     {
         using (context.PushPath("Document"))
         {
@@ -93,6 +98,20 @@ internal static class SpdxValidator
                     }
                 }
             }
+
+            if (document.Relationships?.Count > 0)
+            {
+                using (context.PushPath("Relationships"))
+                {
+                    foreach (var (index, _, _, relationship) in document.Relationships.Enumerate())
+                    {
+                        using (context.PushPath($"[{index}]"))
+                        {
+                            ValidateRelationship(context, relationship);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -103,6 +122,13 @@ internal static class SpdxValidator
             context.AddError(nameof(SpdxPackage.SpdxId), "SPDX package identifier is required")
                 .WithInfo("Hint", $"See property '{nameof(SpdxPackage.SpdxId)}'")
                 .WithInfo("Link", "https://spdx.github.io/spdx-spec/package-information/#72-package-spdx-identifier-field");
+        }
+
+        if (string.IsNullOrWhiteSpace(package.PackageName))
+        {
+            context.AddError(nameof(SpdxPackage.PackageName), "SPDX package identifier is required")
+                .WithInfo("Hint", $"See property '{nameof(SpdxPackage.PackageName)}'")
+                .WithInfo("Link", "https://spdx.github.io/spdx-spec/package-information/#71-package-name-field");
         }
 
         if (string.IsNullOrWhiteSpace(package.PackageDownloadLocation))
@@ -227,6 +253,37 @@ internal static class SpdxValidator
         {
             context.AddError(nameof(SpdxChecksum.Value), "Checksum value is required")
                 .WithInfo("Hint", $"See property '{nameof(SpdxChecksum.Value)}'");
+        }
+    }
+
+    private static void ValidateRelationship(SpdxValidationContext context, SpdxRelationship relationship)
+    {
+        if (string.IsNullOrWhiteSpace(relationship.Identifier))
+        {
+            context.AddError(nameof(SpdxRelationship.Identifier), "Relationship identifier is required")
+                .WithInfo("Hint", $"See property '{nameof(SpdxRelationship.Identifier)}'");
+        }
+
+        if (string.IsNullOrWhiteSpace(relationship.RelatedIdentifier))
+        {
+            context.AddError(nameof(SpdxRelationship.RelatedIdentifier), "Related relationship identifier is required")
+                .WithInfo("Hint", $"See property '{nameof(SpdxRelationship.RelatedIdentifier)}'");
+        }
+
+        if (string.IsNullOrWhiteSpace(relationship.Type))
+        {
+            context.AddError(nameof(SpdxRelationship.Type), "Relationship type is required")
+                .WithInfo("Hint", $"See property '{nameof(SpdxRelationship.Type)}'")
+                .WithInfo("Accepted", string.Join(", ", SpdxRelationship.Types));
+        }
+        else
+        {
+            if (!SpdxRelationship.Types.Contains(relationship.Type))
+            {
+                context.AddError(nameof(SpdxRelationship.Type), $"Unknown relationship type '{relationship.Type}'")
+                    .WithInfo("Hint", $"See property '{nameof(SpdxRelationship.Type)}'")
+                    .WithInfo("Accepted", string.Join(", ", SpdxRelationship.Types));
+            }
         }
     }
 }

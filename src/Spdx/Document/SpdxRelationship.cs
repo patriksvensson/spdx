@@ -3,8 +3,27 @@ namespace Spdx.Document;
 /// <summary>
 /// Represents a SPDX relationship.
 /// </summary>
-public sealed class SpdxRelationship
+public class SpdxRelationship
 {
+    /// <summary>
+    /// Gets a set of all accepted types.
+    /// </summary>
+    public static IReadOnlySet<string> Types { get; } = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "DESCRIBES", "DESCRIBED_BY", "CONTAINS", "CONTAINED_BY",
+        "DEPENDS_ON", "DEPENDENCY_OF", "DEPENDENCY_MANIFEST_OF",
+        "BUILD_DEPENDENCY_OF", "DEV_DEPENDENCY_OF", "OPTIONAL_DEPENDENCY_OF",
+        "PROVIDED_DEPENDENCY_OF", "TEST_DEPENDENCY_OF", "RUNTIME_DEPENDENCY_OF",
+        "EXAMPLE_OF", "GENERATES", "GENERATED_FROM", "ANCESTOR_OF",
+        "DESCENDANT_OF", "VARIANT_OF", "DISTRIBUTION_ARTIFACT",
+        "PATCH_FOR", "PATCH_APPLIED", "COPY_OF", "FILE_ADDED",
+        "FILE_DELETED", "FILE_MODIFIED", "EXPANDED_FROM_ARCHIVE",
+        "DYNAMIC_LINK", "STATIC_LINK", "DATA_FILE_OF", "TEST_CASE_OF",
+        "BUILD_TOOL_OF", "DEV_TOOL_OF", "TEST_OF", "TEST_TOOL_OF",
+        "DOCUMENTATION_OF", "OPTIONAL_COMPONENT_OF", "METAFILE_OF",
+        "PACKAGE_OF", "AMENDS", "PREREQUISITE_FOR", "HAS_PREREQUISITE", "OTHER",
+    };
+
     /// <summary>
     /// Gets or sets the identifier of the SPDX element.
     /// </summary>

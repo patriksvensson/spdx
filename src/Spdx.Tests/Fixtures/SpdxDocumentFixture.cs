@@ -24,7 +24,7 @@ public static class SpdxDocumentFixture
                     new SpdxPackage
                     {
                         SpdxId = "SPDXRef-Hades",
-                        Name = "Hades",
+                        PackageName = "Hades",
                         PackageDownloadLocation = "http://example.com/Hades/Download",
                         CopyrightText = "Copyright 2022 Patrik Svensson",
                         LicenseConcluded = "MIT",
@@ -34,7 +34,7 @@ public static class SpdxDocumentFixture
                     new SpdxPackage
                     {
                         SpdxId = "SPDXRef-Foo",
-                        Name = "Foo",
+                        PackageName = "Foo",
                         VersionInfo = "3.2.1",
                         CopyrightText = "Copyright 2021-2022 John Smith",
                         PackageDownloadLocation = "http://example.com/Foo/Download",
