@@ -1,0 +1,12 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Relationship identifier is required,
+      Context: {
+        Hint: See property 'Identifier',
+        Path: Document::Relationships::[0]::Identifier
+      }
+    }
+  ]
+}

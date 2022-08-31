@@ -3,7 +3,7 @@ namespace Spdx.Document;
 /// <summary>
 /// Represents a SPDX Package
 /// </summary>
-public sealed class SpdxPackage
+public class SpdxPackage
 {
     /// <summary>
     /// Gets or sets an unique identifier for this package which may be referenced by other elements.
@@ -14,7 +14,7 @@ public sealed class SpdxPackage
     /// <summary>
     /// Gets or sets the name of the package as given by the package originator.
     /// </summary>
-    public string Name { get; set; } = null!;
+    public string PackageName { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the version of the package.

@@ -3,7 +3,20 @@ namespace Spdx.Document;
 /// <summary>
 /// Represents a SPDX document.
 /// </summary>
-public sealed class SpdxDocument
+public class SpdxDocument : SpdxDocument<SpdxPackage, SpdxFile, SpdxRelationship>
+{
+}
+
+/// <summary>
+/// Represents a SPDX document.
+/// </summary>
+/// <typeparam name="TPackage">The package type.</typeparam>
+/// <typeparam name="TFile">The file type.</typeparam>
+/// <typeparam name="TRelationship">The relationship type</typeparam>
+public class SpdxDocument<TPackage, TFile, TRelationship>
+    where TPackage : SpdxPackage
+    where TFile : SpdxFile
+    where TRelationship : SpdxRelationship
 {
     /// <summary>
     /// Gets or sets a reference number that can be used to understand how to parse and
@@ -80,17 +93,17 @@ public sealed class SpdxDocument
     /// <summary>
     /// Gets or sets the document's packages.
     /// </summary>
-    public List<SpdxPackage> Packages { get; set; } = new List<SpdxPackage>();
+    public List<TPackage> Packages { get; set; } = new List<TPackage>();
 
     /// <summary>
     /// Gets or sets the document's files.
     /// </summary>
-    public List<SpdxFile> Files { get; set; } = new List<SpdxFile>();
+    public List<TFile> Files { get; set; } = new List<TFile>();
 
     /// <summary>
     /// Gets or sets the relationships between the document's entities (packages, files, etc).
     /// </summary>
-    public List<SpdxRelationship> Relationships { get; set; } = new List<SpdxRelationship>();
+    public List<TRelationship> Relationships { get; set; } = new List<TRelationship>();
 
     /// <summary>
     /// Serializes the SPDX document to JSON.
