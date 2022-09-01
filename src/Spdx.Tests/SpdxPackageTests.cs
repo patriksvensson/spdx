@@ -37,51 +37,6 @@ public sealed class SpdxPackageTests
         }
 
         [Fact]
-        [Expectation("LicenseConcluded")]
-        public Task Should_Have_LicenseConcluded()
-        {
-            // Given
-            var document = SpdxDocumentFixture.Create();
-            document.Packages[1].LicenseConcluded = null!;
-
-            // When
-            var result = document.Validate();
-
-            // Then
-            return Verify(result);
-        }
-
-        [Fact]
-        [Expectation("LicenseDeclared")]
-        public Task Should_Have_LicenseDeclared()
-        {
-            // Given
-            var document = SpdxDocumentFixture.Create();
-            document.Packages[1].LicenseDeclared = null!;
-
-            // When
-            var result = document.Validate();
-
-            // Then
-            return Verify(result);
-        }
-
-        [Fact]
-        [Expectation("CopyrightText")]
-        public Task Should_Have_CopyrightText()
-        {
-            // Given
-            var document = SpdxDocumentFixture.Create();
-            document.Packages[1].CopyrightText = null!;
-
-            // When
-            var result = document.Validate();
-
-            // Then
-            return Verify(result);
-        }
-
-        [Fact]
         [Expectation("Checksum_Algorithm")]
         public Task Should_Have_Checksum_Algorithm_For_Checksum()
         {

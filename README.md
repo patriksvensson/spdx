@@ -10,7 +10,7 @@ An (unoffical) library for working with [SPDX](https://spdx.dev/) (Software Pack
 
 * Retrieve information about SPDX licenses
 * Parse SPDX license expressions
-* Create SPDX documents
+* Create SPDX 2.3 documents
 
 ## Examples
 

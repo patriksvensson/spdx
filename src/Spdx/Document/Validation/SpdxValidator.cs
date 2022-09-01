@@ -153,27 +153,6 @@ internal static class SpdxValidator
                 .WithInfo("Link", "https://spdx.github.io/spdx-spec/package-information/#77-package-download-location-field");
         }
 
-        if (string.IsNullOrWhiteSpace(package.LicenseConcluded))
-        {
-            context.AddError(nameof(SpdxPackage.LicenseConcluded), "Concluded license for package is required")
-                .WithInfo("Hint", $"See property '{nameof(SpdxPackage.LicenseConcluded)}'")
-                .WithInfo("Link", "https://spdx.github.io/spdx-spec/package-information/#713-concluded-license-field");
-        }
-
-        if (string.IsNullOrWhiteSpace(package.LicenseDeclared))
-        {
-            context.AddError(nameof(SpdxPackage.LicenseDeclared), "Declared license for package is required")
-                .WithInfo("Hint", $"See property '{nameof(SpdxPackage.LicenseDeclared)}'")
-                .WithInfo("Link", "https://spdx.github.io/spdx-spec/package-information/#715-declared-license-field");
-        }
-
-        if (string.IsNullOrWhiteSpace(package.CopyrightText))
-        {
-            context.AddError(nameof(SpdxPackage.CopyrightText), "Package copyright text is required")
-                .WithInfo("Hint", $"See property '{nameof(SpdxPackage.CopyrightText)}'")
-                .WithInfo("Link", "https://spdx.github.io/spdx-spec/package-information/#717-copyright-text-field");
-        }
-
         if (package.Checksums != null)
         {
             using (context.PushPath("Checksums"))
@@ -225,27 +204,6 @@ internal static class SpdxValidator
                     .WithInfo("Hint", $"See property '{nameof(SpdxFile.Checksums)}'")
                     .WithInfo("Link", "https://spdx.github.io/spdx-spec/file-information/#84-file-checksum-field");
             }
-        }
-
-        if (string.IsNullOrWhiteSpace(file.LicenseConcluded))
-        {
-            context.AddError(nameof(SpdxFile.LicenseConcluded), "Concluded license for file is required")
-                .WithInfo("Hint", $"See property '{nameof(SpdxFile.LicenseConcluded)}'")
-                .WithInfo("Link", "https://spdx.github.io/spdx-spec/file-information/#85-concluded-license-field");
-        }
-
-        if (file.LicenseInfoInFiles == null || file.LicenseInfoInFiles.Count == 0)
-        {
-            context.AddError(nameof(SpdxFile.LicenseInfoInFiles), "License information found in file required. If none, set to 'NONE'")
-                .WithInfo("Hint", $"See property '{nameof(SpdxFile.LicenseInfoInFiles)}'")
-                .WithInfo("Link", "https://spdx.github.io/spdx-spec/file-information/#86-license-information-in-file-field");
-        }
-
-        if (string.IsNullOrWhiteSpace(file.CopyrightText))
-        {
-            context.AddError(nameof(SpdxFile.CopyrightText), "File copyright text is required")
-                .WithInfo("Hint", $"See property '{nameof(SpdxFile.CopyrightText)}'")
-                .WithInfo("Link", "https://spdx.github.io/spdx-spec/file-information/#88-copyright-text-field");
         }
     }
 

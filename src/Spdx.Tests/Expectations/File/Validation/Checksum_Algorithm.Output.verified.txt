@@ -4,7 +4,7 @@
     {
       Message: Checksum algorithm is required,
       Context: {
-        Accepted: SHA1, SHA224, SHA256, SHA384, SHA512, MD2, MD4, MD5, MD6,
+        Accepted: SHA1, SHA224, SHA256, SHA384, SHA512, MD2, MD4, MD5, MD6, SHA3-256, SHA3-384, SHA3-512, BLAKE2b-256, BLAKE2b-384, BLAKE2b-512, BLAKE3, ADLER32,
         Hint: See property 'Algorithm',
         Path: Document::Files::[0]::Checksums::[0]::Algorithm
       }
