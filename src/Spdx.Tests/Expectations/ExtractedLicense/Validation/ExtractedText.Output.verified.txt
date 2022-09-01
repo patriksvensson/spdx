@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: Extracted text is required,
+      Context: {
+        Hint: See property 'ExtractedText',
+        Link: https://spdx.github.io/spdx-spec/other-licensing-information-detected/#102-extracted-text-field,
+        Path: Document::ExtractedLicenses::[0]::ExtractedText
+      }
+    }
+  ]
+}

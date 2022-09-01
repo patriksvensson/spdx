@@ -2,8 +2,8 @@ namespace Spdx.Document;
 
 internal static class SpdxSerializer
 {
-    public static bool Serialize<TPackage, TFile, TRelationship>(
-        SpdxDocument<TPackage, TFile, TRelationship> document,
+    public static bool Serialize<TPackage, TFile, TRelationship, TExtractedLicense>(
+        SpdxDocument<TPackage, TFile, TRelationship, TExtractedLicense> document,
         SpdxDocumentFormat format,
         out SpdxValidationReport report,
         [NotNullWhen(true)] out string? output,
@@ -11,6 +11,7 @@ internal static class SpdxSerializer
             where TPackage : SpdxPackage
             where TFile : SpdxFile
             where TRelationship : SpdxRelationship
+            where TExtractedLicense : SpdxExtractedLicense
     {
         if (document is null)
         {

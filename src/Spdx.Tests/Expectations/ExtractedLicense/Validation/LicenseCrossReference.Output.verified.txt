@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: SPDX licenses should not contain cross references,
+      Context: {
+        Hint: See property 'LicenseCrossReference',
+        Link: https://spdx.github.io/spdx-spec/other-licensing-information-detected/#104-license-cross-reference-field,
+        Path: Document::ExtractedLicenses::[0]::LicenseCrossReference
+      }
+    }
+  ]
+}

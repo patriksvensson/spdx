@@ -2,12 +2,13 @@ namespace Spdx.Document;
 
 internal static class SpdxValidator
 {
-    public static void Validate<TPackage, TFile, TRelationship>(
+    public static void Validate<TPackage, TFile, TRelationship, TExtractedLicense>(
         SpdxValidationContext context,
-        SpdxDocument<TPackage, TFile, TRelationship> document)
+        SpdxDocument<TPackage, TFile, TRelationship, TExtractedLicense> document)
             where TPackage : SpdxPackage
             where TFile : SpdxFile
             where TRelationship : SpdxRelationship
+            where TExtractedLicense : SpdxExtractedLicense
     {
         using (context.PushPath("Document"))
         {
@@ -108,6 +109,20 @@ internal static class SpdxValidator
                         using (context.PushPath($"[{index}]"))
                         {
                             ValidateRelationship(context, relationship);
+                        }
+                    }
+                }
+            }
+
+            if (document.ExtractedLicenses?.Count > 0)
+            {
+                using (context.PushPath("ExtractedLicenses"))
+                {
+                    foreach (var (index, _, _, license) in document.ExtractedLicenses.Enumerate())
+                    {
+                        using (context.PushPath($"[{index}]"))
+                        {
+                            ValidateExtractedLicense(context, license);
                         }
                     }
                 }
@@ -284,6 +299,22 @@ internal static class SpdxValidator
                     .WithInfo("Hint", $"See property '{nameof(SpdxRelationship.Type)}'")
                     .WithInfo("Accepted", string.Join(", ", SpdxRelationship.Types));
             }
+        }
+    }
+
+    private static void ValidateExtractedLicense(SpdxValidationContext context, SpdxExtractedLicense license)
+    {
+        if (string.IsNullOrWhiteSpace(license.LicenseId))
+        {
+            context.AddError(nameof(SpdxExtractedLicense.LicenseId), "License ID is required")
+                .WithInfo("Hint", $"See property '{nameof(SpdxExtractedLicense.LicenseId)}'")
+                .WithInfo("Link", "https://spdx.github.io/spdx-spec/other-licensing-information-detected/#101-license-identifier-field");
+        }
+        else if (string.IsNullOrWhiteSpace(license.ExtractedText))
+        {
+            context.AddError(nameof(SpdxExtractedLicense.ExtractedText), "Extracted text is required")
+                .WithInfo("Hint", $"See property '{nameof(SpdxExtractedLicense.ExtractedText)}'")
+                .WithInfo("Link", "https://spdx.github.io/spdx-spec/other-licensing-information-detected/#102-extracted-text-field");
         }
     }
 }

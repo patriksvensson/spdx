@@ -36,9 +36,9 @@ internal sealed class JsonWriterEx : IDisposable
         return new Scope(() => _json.WriteEndArray());
     }
 
-    public void WriteArray<T>(string name, IEnumerable<T> values)
+    public void WriteArray<T>(string name, ICollection<T> values)
     {
-        if (values != null)
+        if (values != null && values.Count > 0)
         {
             _json.WritePropertyName(name);
             _json.WriteStartArray();
