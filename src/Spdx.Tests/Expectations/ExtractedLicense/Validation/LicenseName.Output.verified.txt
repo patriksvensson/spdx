@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: License name is required for non SPDX licenses,
+      Context: {
+        Hint: See property 'LicenseName',
+        Link: https://spdx.github.io/spdx-spec/other-licensing-information-detected/#103-license-name-field,
+        Path: Document::ExtractedLicenses::[0]::LicenseName
+      }
+    }
+  ]
+}

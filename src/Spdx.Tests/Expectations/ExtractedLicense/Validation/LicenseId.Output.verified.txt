@@ -1,0 +1,13 @@
+{
+  Successful: false,
+  Errors: [
+    {
+      Message: License ID is required,
+      Context: {
+        Hint: See property 'LicenseId',
+        Link: https://spdx.github.io/spdx-spec/other-licensing-information-detected/#101-license-identifier-field,
+        Path: Document::ExtractedLicenses::[0]::LicenseId
+      }
+    }
+  ]
+}

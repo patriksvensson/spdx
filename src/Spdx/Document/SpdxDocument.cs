@@ -3,7 +3,8 @@ namespace Spdx.Document;
 /// <summary>
 /// Represents a SPDX document.
 /// </summary>
-public class SpdxDocument : SpdxDocument<SpdxPackage, SpdxFile, SpdxRelationship>
+public class SpdxDocument
+    : SpdxDocument<SpdxPackage, SpdxFile, SpdxRelationship, SpdxExtractedLicense>
 {
 }
 
@@ -13,10 +14,12 @@ public class SpdxDocument : SpdxDocument<SpdxPackage, SpdxFile, SpdxRelationship
 /// <typeparam name="TPackage">The package type.</typeparam>
 /// <typeparam name="TFile">The file type.</typeparam>
 /// <typeparam name="TRelationship">The relationship type</typeparam>
-public class SpdxDocument<TPackage, TFile, TRelationship>
+/// <typeparam name="TExtractedLicense">The extracted license type</typeparam>
+public class SpdxDocument<TPackage, TFile, TRelationship, TExtractedLicense>
     where TPackage : SpdxPackage
     where TFile : SpdxFile
     where TRelationship : SpdxRelationship
+    where TExtractedLicense : SpdxExtractedLicense
 {
     /// <summary>
     /// Gets or sets a reference number that can be used to understand how to parse and
@@ -104,6 +107,11 @@ public class SpdxDocument<TPackage, TFile, TRelationship>
     /// Gets or sets the relationships between the document's entities (packages, files, etc).
     /// </summary>
     public List<TRelationship> Relationships { get; set; } = new List<TRelationship>();
+
+    /// <summary>
+    /// Gets or sets the extracted licenses.
+    /// </summary>
+    public List<TExtractedLicense> ExtractedLicenses { get; set; } = new List<TExtractedLicense>();
 
     /// <summary>
     /// Serializes the SPDX document to JSON.

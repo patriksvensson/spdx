@@ -19,6 +19,26 @@ public static class SpdxDocumentFixture
                     },
             },
 
+            ExtractedLicenses = new List<SpdxExtractedLicense>
+            {
+                new SpdxExtractedLicense
+                {
+                    LicenseId = "LicenseRef-1",
+                    ExtractedText = "/*\n * (c) Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Spectre Systems AB",
+                },
+                new SpdxExtractedLicense
+                {
+                    LicenseId = "LicenseRef-FOO",
+                    LicenseName = "The FOO license",
+                    ExtractedText = "This is the extracted text from the license",
+                    LicenseComment = "This is a comment for the license",
+                    LicenseCrossReference = new List<string>
+                    {
+                        "http://example.com/licenses/foo",
+                    },
+                },
+            },
+
             Packages = new List<SpdxPackage>
                 {
                     new SpdxPackage
@@ -38,7 +58,7 @@ public static class SpdxDocumentFixture
                         VersionInfo = "3.2.1",
                         CopyrightText = "Copyright 2021-2022 John Smith",
                         PackageDownloadLocation = "http://example.com/Foo/Download",
-                        LicenseConcluded = "(MIT OR Apache-2.0)",
+                        LicenseConcluded = "(MIT OR Apache-2.0) OR LicenseRef-FOO",
                         LicenseDeclared = "(Apache-2.0 OR MIT)",
                         LicenseInfoFromFiles = new List<string> { "Apache-2.0", "MIT" },
                         Supplier = "Person: John Smith (john.smith@example.com)",
@@ -88,7 +108,7 @@ public static class SpdxDocumentFixture
                         Filename = "build.cake",
                         FileTypes = new List<string> { "SOURCE" },
                         LicenseConcluded = "MIT",
-                        LicenseInfoInFiles = new List<string> { "MIT", "Apache-2.0" },
+                        LicenseInfoInFiles = new List<string> { "MIT", "Apache-2.0", "LicenseRef-1" },
                         Checksums = new List<SpdxChecksum>
                         {
                             new SpdxChecksum

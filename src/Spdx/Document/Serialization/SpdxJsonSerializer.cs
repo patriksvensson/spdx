@@ -4,11 +4,12 @@ namespace Spdx.Document;
 
 internal sealed class SpdxJsonSerializer
 {
-    public static string Serialize<TPackage, TFile, TRelationship>(
-        SpdxDocument<TPackage, TFile, TRelationship> document)
+    public static string Serialize<TPackage, TFile, TRelationship, TExtractedLicense>(
+        SpdxDocument<TPackage, TFile, TRelationship, TExtractedLicense> document)
             where TPackage : SpdxPackage
             where TFile : SpdxFile
             where TRelationship : SpdxRelationship
+            where TExtractedLicense : SpdxExtractedLicense
     {
         if (document is null)
         {
@@ -28,6 +29,17 @@ internal sealed class SpdxJsonSerializer
                 if (document.CreationInfo != null)
                 {
                     WriteCreationInfo(writer, document.CreationInfo);
+                }
+
+                if (document.ExtractedLicenses?.Count > 0)
+                {
+                    using (writer.WriteArray("hasExtractedLicensingInfos"))
+                    {
+                        foreach (var relationship in document.ExtractedLicenses)
+                        {
+                            WriteExtractedLicense(writer, relationship);
+                        }
+                    }
                 }
 
                 if (document.Packages?.Count > 0)
@@ -210,6 +222,18 @@ internal sealed class SpdxJsonSerializer
             writer.WriteProperty("spdxElementId", relationship.Identifier);
             writer.WriteProperty("relatedSpdxElement", relationship.RelatedIdentifier);
             writer.WriteProperty("relationshipType", relationship.Type);
+        }
+    }
+
+    private static void WriteExtractedLicense(JsonWriterEx writer, SpdxExtractedLicense license)
+    {
+        using (writer.WriteObject())
+        {
+            writer.WriteProperty("licenseId", license.LicenseId);
+            writer.WriteProperty("name", license.LicenseName);
+            writer.WriteProperty("extractedText", license.ExtractedText);
+            writer.WriteProperty("comment", license.LicenseComment);
+            writer.WriteArray("seeAlsos", license.LicenseCrossReference);
         }
     }
 }
