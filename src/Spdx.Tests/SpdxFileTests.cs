@@ -37,36 +37,6 @@ public sealed class SpdxFileTests
         }
 
         [Fact]
-        [Expectation("LicenseConcluded")]
-        public Task Should_Have_LicenseConcluded()
-        {
-            // Given
-            var document = SpdxDocumentFixture.Create();
-            document.Files[0].LicenseConcluded = null!;
-
-            // When
-            var result = document.Validate();
-
-            // Then
-            return Verify(result);
-        }
-
-        [Fact]
-        [Expectation("CopyrightText")]
-        public Task Should_Have_CopyrightText()
-        {
-            // Given
-            var document = SpdxDocumentFixture.Create();
-            document.Files[0].CopyrightText = null!;
-
-            // When
-            var result = document.Validate();
-
-            // Then
-            return Verify(result);
-        }
-
-        [Fact]
         [Expectation("Checksum_Algorithm")]
         public Task Should_Have_Checksum_Algorithm_For_Checksum()
         {
@@ -103,21 +73,6 @@ public sealed class SpdxFileTests
             // Given
             var document = SpdxDocumentFixture.Create();
             document.Files[0].Checksums[0].Value = null!;
-
-            // When
-            var result = document.Validate();
-
-            // Then
-            return Verify(result);
-        }
-
-        [Fact]
-        [Expectation("LicenseInfoInFiles")]
-        public Task Should_Have_LicenseInfoInFiles()
-        {
-            // Given
-            var document = SpdxDocumentFixture.Create();
-            document.Files[0].LicenseInfoInFiles.Clear();
 
             // When
             var result = document.Validate();

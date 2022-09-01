@@ -21,7 +21,9 @@ public class SpdxRelationship
         "DYNAMIC_LINK", "STATIC_LINK", "DATA_FILE_OF", "TEST_CASE_OF",
         "BUILD_TOOL_OF", "DEV_TOOL_OF", "TEST_OF", "TEST_TOOL_OF",
         "DOCUMENTATION_OF", "OPTIONAL_COMPONENT_OF", "METAFILE_OF",
-        "PACKAGE_OF", "AMENDS", "PREREQUISITE_FOR", "HAS_PREREQUISITE", "OTHER",
+        "PACKAGE_OF", "AMENDS", "PREREQUISITE_FOR", "HAS_PREREQUISITE",
+        "REQUIREMENT_DESCRIPTION_FOR", "SPECIFICATION_FOR",
+        "OTHER",
     };
 
     /// <summary>
@@ -86,6 +88,8 @@ public class SpdxRelationship
     ///     <item><term>AMENDS</term> Is to be used when (current) SPDXRef-DOCUMENT amends the SPDX information in <c>SPDXRef-B</c>.</item>
     ///     <item><term>PREREQUISITE_FOR</term> Is to be used when <c>SPDXRef-A</c> is a prerequisite for <c>SPDXRef-B</c>.</item>
     ///     <item><term>HAS_PREREQUISITE</term> Is to be used when <c>SPDXRef-A</c> has as a prerequisite <c>SPDXRef-B</c>.</item>
+    ///     <item><term>REQUIREMENT_DESCRIPTION_FOR</term> Is to be used when SPDXRef-A describes, illustrates, or specifies a requirement statement for SPDXRef-B.</item>
+    ///     <item><term>SPECIFICATION_FOR</term> Is to be used when SPDXRef-A describes, illustrates, or defines a design specification for SPDXRef-B.</item>
     ///     <item><term>OTHER</term> Is to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</item>
     /// </list>
     /// </summary>

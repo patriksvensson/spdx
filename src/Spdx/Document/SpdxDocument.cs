@@ -30,7 +30,7 @@ public class SpdxDocument<TPackage, TFile, TRelationship, TExtractedLicense>
     /// versions are made (one or more sections are created, modified or deleted).
     /// </summary>
     /// <example>SPDX-2.2</example>
-    public string SpdxVersion { get; set; } = "SPDX-2.2";
+    public string SpdxVersion { get; set; } = "SPDX-2.3";
 
     /// <summary>
     /// Gets or sets the data license.

@@ -1,6 +1,6 @@
 {
   "SPDXID": "SPDXRef-DOCUMENT",
-  "spdxVersion": "SPDX-2.2",
+  "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "name": "hades",
   "documentNamespace": "http://spdx.org/spdxdocs/hades-9906A8B7-A923-40B6-ACC1-4D36F7E1FF6D",
