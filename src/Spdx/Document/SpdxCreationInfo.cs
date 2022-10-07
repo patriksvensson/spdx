@@ -30,4 +30,11 @@ public sealed class SpdxCreationInfo
     /// designated as <c>anonymous</c> if appropriate.
     /// </summary>
     public List<string> Creators { get; set; } = new List<string>();
+
+    /// <summary>
+    /// Gets or sets an optional field for creators of the SPDX document to provide
+    /// general comments about the creation of the SPDX document or any other
+    /// relevant comment not included in the other fields.
+    /// </summary>
+    public string CreatorComment { get; set; } = null!;
 }

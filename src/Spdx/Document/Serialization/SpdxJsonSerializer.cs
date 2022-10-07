@@ -107,6 +107,11 @@ internal sealed class SpdxJsonSerializer
                 writer.WriteProperty("created", created.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
             }
 
+            if (info.CreatorComment != null)
+            {
+                writer.WriteProperty("comment", string.Concat("<text>", info.CreatorComment, "</text>"));
+            }
+
             if (info.Creators?.Count > 0)
             {
                 writer.WriteArray("creators", info.Creators);
