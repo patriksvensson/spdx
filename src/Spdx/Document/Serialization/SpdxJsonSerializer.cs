@@ -26,6 +26,13 @@ internal sealed class SpdxJsonSerializer
                 writer.WriteProperty("name", document.DocumentName);
                 writer.WriteProperty("documentNamespace", document.DocumentNamespace);
 
+                if (document.DocumentComment != null)
+                {
+                    writer.WriteProperty(
+                        "comment",
+                        string.Concat("<text>", document.DocumentComment, "</text>"));
+                }
+
                 if (document.CreationInfo != null)
                 {
                     WriteCreationInfo(writer, document.CreationInfo);

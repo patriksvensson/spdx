@@ -94,6 +94,12 @@ public class SpdxDocument<TPackage, TFile, TRelationship, TExtractedLicense>
     public SpdxCreationInfo CreationInfo { get; set; } = new SpdxCreationInfo();
 
     /// <summary>
+    /// Gets or sets an optional field for creators of the SPDX document content to
+    /// provide comments to the consumers of the SPDX document.
+    /// </summary>
+    public string DocumentComment { get; set; } = null!;
+
+    /// <summary>
     /// Gets or sets the document's packages.
     /// </summary>
     public List<TPackage> Packages { get; set; } = new List<TPackage>();

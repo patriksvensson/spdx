@@ -4,6 +4,7 @@
   "dataLicense": "CC0-1.0",
   "name": "hades",
   "documentNamespace": "http://spdx.org/spdxdocs/hades-9906A8B7-A923-40B6-ACC1-4D36F7E1FF6D",
+  "comment": "<text>A comment</text>",
   "creationInfo": {
     "licenseListVersion": "3.18",
     "created": "2020-08-19T19:44:12Z",

@@ -9,6 +9,7 @@ public static class SpdxDocumentFixture
             SpdxId = "SPDXRef-DOCUMENT",
             DocumentName = "hades",
             DocumentNamespace = "http://spdx.org/spdxdocs/hades-9906A8B7-A923-40B6-ACC1-4D36F7E1FF6D",
+            DocumentComment = "A comment",
             CreationInfo = new SpdxCreationInfo
             {
                 Created = new DateTimeOffset(2020, 08, 19, 19, 44, 12, TimeSpan.Zero),
