@@ -22,10 +22,10 @@
 
   <ItemGroup>
     <PackageReference Include="Octokit" Version="2.0.1" />
-    <PackageReference Include="Scriban" Version="5.4.6" />
-    <PackageReference Include="Spectre.Console" Version="0.44.0" />
-    <PackageReference Include="Spectre.IO" Version="0.8.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.5" />
+    <PackageReference Include="Scriban" Version="5.9.0" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.47.0" />
+    <PackageReference Include="Spectre.IO" Version="0.14.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
   
 </Project>
