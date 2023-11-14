@@ -4,7 +4,7 @@ _[![Spdx NuGet Version](https://img.shields.io/nuget/v/spdx.svg?style=flat&label
 
 An (unoffical) library for working with [SPDX](https://spdx.dev/) (Software Package Data Exchange).
 
-**License database version:** 3.20
+**License database version:** 3.22
 
 # Features
 
