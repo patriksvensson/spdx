@@ -21,6 +21,7 @@ public sealed class SpdxParseException : Exception
     {
     }
 
+#if !NET8_0_OR_GREATER
     /// <summary>
     /// Initializes a new instance of the <see cref="SpdxParseException"/> class.
     /// </summary>
@@ -36,6 +37,7 @@ public sealed class SpdxParseException : Exception
         : base(info, context)
     {
     }
+#endif
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SpdxParseException"/> class.
