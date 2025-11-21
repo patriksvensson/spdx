@@ -2,7 +2,6 @@ namespace Spdx.Tests;
 
 public sealed class SpdxRelationshipTests
 {
-    [UsesVerify]
     [ExpectationPath("Relationship/Validation")]
     public sealed class TheValidateMethod
     {

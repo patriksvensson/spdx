@@ -17,7 +17,9 @@ public sealed class ImportCommand : AsyncCommand<ImportCommand.Settings>
         }
     }
 
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(
+        CommandContext context, Settings settings,
+        CancellationToken cancellationToken)
     {
         return await AnsiConsole.Status()
             .StartAsync("Generating...", async ctx =>

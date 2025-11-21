@@ -2,7 +2,6 @@ namespace Spdx.Tests;
 
 public sealed class SpdxExtractedLicenseTests
 {
-    [UsesVerify]
     [ExpectationPath("ExtractedLicense/Validation")]
     public sealed class TheValidateMethod
     {

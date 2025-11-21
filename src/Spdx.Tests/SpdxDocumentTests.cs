@@ -4,7 +4,6 @@ namespace Spdx.Tests;
 
 public sealed class SpdxDocumentTests
 {
-    [UsesVerify]
     [ExpectationPath("Document/Serialization")]
     public sealed class TheSerializeMethod
     {
@@ -76,7 +75,6 @@ public sealed class SpdxDocumentTests
         }
     }
 
-    [UsesVerify]
     [ExpectationPath("Document/Validation")]
     public sealed class TheValidateMethod
     {

@@ -2,7 +2,6 @@ namespace Spdx.Tests;
 
 public sealed class SpdxPackageTests
 {
-    [UsesVerify]
     [ExpectationPath("Package/Validation")]
     public sealed class TheValidateMethod
     {
